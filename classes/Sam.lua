@@ -72,11 +72,11 @@ class "Sam"
 		self.position.x = self.position.x + self.velocity.x * dt
 		self.position.y = self.position.y + self.velocity.y * dt
 
-		if love.keyboard.isDown("left") then
+		if love.keyboard.isDown("left", "a") then
 			self.position.x = self.position.x - (50 * dt)
 		end
 		
-		if love.keyboard.isDown("right") then
+		if love.keyboard.isDown("right", "d") then
 			self.position.x = self.position.x + (50 * dt)
 		end
 
