@@ -6,9 +6,9 @@ local game = {}
 
 function game:load()
 	self.timer = 0
-	samTex = cache.image("gfx/sam.png")
-	sam = Sam({x=400,y=100},{x=0,y=0}, samTex)
 	self.map = TileMap.fromFile("gfx/tileset.png", "levels/lvl1.txt")
+	samTex = cache.image("gfx/sam.png")
+	sam = Sam({x=400,y=100},{x=0,y=0}, samTex, self.map)
 
 	love.graphics.setBackgroundColor(200, 100, 120)
 end

@@ -1,8 +1,9 @@
 require "lib/slither"
+require "classes.TileMap"
 
 class "Sam"
 {	
-	__init__ = function(self, position, velocity, tex)
+	__init__ = function(self, position, velocity, tex, map)
 		self.position = position or {x=0,y=0}
 		self.velocity = {x=0,y=0}
 		self.acceleration = {x=0,y=0}
@@ -13,6 +14,10 @@ class "Sam"
 		self.fuel = 100
 		self.facingRight = true
 		self.texWidth = tex:getWidth()
+		self.texHeight = tex:getHeight()
+		self.map = map
+		self.leftFoot = {x=0,y=0}
+		self.rightFoot = {x=0,y=0}
 	end,
 	
 	draw = function(self)
@@ -108,19 +113,40 @@ class "Sam"
 				self.position.x = self.position.x + (50 * dt)
 				self.facingRight = true
 			end
-
-
-		-- hit ground
-		if self.position.y >= 300 and self.velocity.y >= 0 then
+			
+		--updateFeet
+		self.leftFoot.x = self.position.x
+		self.leftFoot.y = self.position.y + self.texHeight
+		self.rightFoot.x = self.position.x + self.texHeight
+		self.rightFoot.y = self.position.y + self.texHeight
+		
+		if self.map:isSolid(math.floor(self.leftFoot.x/16)+1,math.floor(self.leftFoot.y/16)+1) then
+			self.position.y = self.leftFoot.y - self.texHeight
 			self.onGround = true
-			self.position.y = 300
 		else
 			self.onGround = false
 		end
+		
+		if self.map:isSolid(math.floor(self.rightFoot.x/16)+1,math.floor(self.rightFoot.y/16)+1) then
+			self.position.y = self.rightFoot.y - self.texHeight
+			self.onGround = true
+		else
+			self.onGround = false
+		end
+			
+
+		-- hit ground
+		--if self.position.y >= 300 and self.velocity.y >= 0 then
+			--self.onGround = true
+			--self.position.y = 300
+		--else
+			--self.onGround = false
+		--end
 		
 		self.screenPosition.x = self.position.x - self.scroll.x
 		self.screenPosition.y = self.position.y - self.scroll.y	
 		
 		
-	end
+	end,
+
 }
