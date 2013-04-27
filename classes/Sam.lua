@@ -11,10 +11,16 @@ class "Sam"
 		self.tex = tex
 		self.onGround = true
 		self.fuel = 100
+		self.facingRight = true
+		self.texWidth = tex:getWidth()
 	end,
 	
 	draw = function(self)
-		love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y)
+		if self.facingRight then
+			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y)
+		else
+			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y,0,-1,1,self.texWidth,0)
+		end
 	end,
 	
 	
@@ -23,6 +29,11 @@ class "Sam"
 			self.velocity.y = - 100
 		end
 	end,
+	
+	--dash = function(self)
+		--if self.fuel > 25 then
+		
+	
 		
 	
 	update = function(self,dt)
@@ -74,10 +85,12 @@ class "Sam"
 
 		if love.keyboard.isDown("left", "a") then
 			self.position.x = self.position.x - (50 * dt)
+			self.facingRight = false
 		end
 		
 		if love.keyboard.isDown("right", "d") then
 			self.position.x = self.position.x + (50 * dt)
+			self.facingRight = true
 		end
 
 		-- hit ground
