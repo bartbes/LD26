@@ -1,0 +1,41 @@
+<<<<<<< local
+require "Classes/Sam"
+=======
+require "classes.TileMap"
+>>>>>>> other
+
+local intro = {}
+
+function intro:load()
+	self.timer = 0
+<<<<<<< local
+	samTex = love.graphics.newImage("SamTest.png")
+	sam = Sam({x=400,y=100},{x=0,y=0}, samTex)
+=======
+	self.map = TileMap("gfx/testsheet.png", {
+		"ab8YA",
+		"77n-+",
+	})
+
+	love.graphics.setBackgroundColor(200, 100, 120)
+>>>>>>> other
+end
+
+function intro:update(dt)
+	self.timer = self.timer + dt
+	sam:update(dt)
+end
+
+function intro:draw()
+	love.graphics.rectangle('fill',
+		500 + 50*math.sin(self.timer),
+		500 + 50*math.cos(self.timer),
+		100, 100)
+<<<<<<< local
+		sam:draw()
+=======
+	self.map:draw()
+>>>>>>> other
+end
+
+return intro
