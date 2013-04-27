@@ -52,6 +52,10 @@ class "TileMap" {
 			tilecount = tilecount + #self.tiles[y]
 		end
 
+		self:buildBatch()
+	end,
+
+	buildBatch = function(self)
 		self.batch = love.graphics.newSpriteBatch(self.sheet, tilecount, "static")
 		local quadcache = {}
 
@@ -70,6 +74,12 @@ class "TileMap" {
 
 	draw = function(self, ...)
 		return love.graphics.draw(self.batch, ...)
+	end,
+
+	isSolid = function(self, x, y)
+		if not self.tiles[y] then return false end
+		if not self.tiles[y][x] then return false end
+		return self.tiles[y][x] >= 52 -- 0 and on
 	end,
 
 	fromFile = function(image, levelfile)
