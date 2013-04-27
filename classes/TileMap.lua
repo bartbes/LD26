@@ -7,7 +7,7 @@ local sheetsize = 8 * (tilesize+2)
 local function decodeTile(ch)
 	ch = ch:byte()
 	if ch >= 65 and ch <= 90 then
-		return 0 + (ch - 66)
+		return 0 + (ch - 65)
 	end
 	if ch >= 97 and ch <= 122 then
 		return 26 + (ch - 97)
