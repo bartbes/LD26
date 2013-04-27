@@ -2,9 +2,9 @@ require "classes.TileMap"
 require "classes.Sam"
 local cache = require "lib.cache"
 
-local intro = {}
+local game = {}
 
-function intro:load()
+function game:load()
 	self.timer = 0
 	samTex = cache.image("gfx/sam.png")
 	sam = Sam({x=400,y=100},{x=0,y=0}, samTex)
@@ -16,19 +16,19 @@ function intro:load()
 	love.graphics.setBackgroundColor(200, 100, 120)
 end
 
-function intro:update(dt)
+function game:update(dt)
 	self.timer = self.timer + dt
 	sam:update(dt)
 end
 
-function intro:draw()
+function game:draw()
 	love.graphics.scale(2, 2)
 	self.map:draw()
 	sam:draw()
 	drawFuelGuage()
 end
 
-function intro:keypressed(key, unicode)
+function game:keypressed(key, unicode)
 	if key == " " then
 		sam:jump()
 	elseif key == "escape" then
@@ -51,4 +51,4 @@ function drawFuelGuage()
 	love.graphics.setColor(255,255,255)
 end
 
-return intro
+return game
