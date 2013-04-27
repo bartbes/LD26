@@ -2,7 +2,7 @@ require "lib.slither"
 local cache = require "lib.cache"
 
 local tilesize = 16
-local sheetsize = 8 * tilesize
+local sheetsize = 8 * (tilesize+2)
 
 local function decodeTile(ch)
 	ch = ch:byte()
@@ -30,7 +30,7 @@ local function generateQuad(tile)
 	local x = tile % 8
 	local y = math.floor(tile / 8)
 
-	return love.graphics.newQuad(x * tilesize, y * tilesize,
+	return love.graphics.newQuad(x * (tilesize+2), y * (tilesize+2),
 		tilesize, tilesize, sheetsize, sheetsize)
 end
 
@@ -70,5 +70,14 @@ class "TileMap" {
 
 	draw = function(self, ...)
 		return love.graphics.draw(self.batch, ...)
+	end,
+
+	fromFile = function(image, levelfile)
+		local desc = {}
+		for line in love.filesystem.lines(levelfile) do
+			table.insert(desc, line)
+		end
+
+		return TileMap(image, desc)
 	end,
 }
