@@ -18,7 +18,7 @@ class "Sam"
 	update = function(self,dt)
 		self.position.x = self.position.x + self.velocity.x * dt
 		self.position.y = self.position.y + self.velocity.y * dt
-		
+
 		if love.keyboard.isDown("left") then
 			self.position.x = self.position.x - (5 * dt)
 		end
@@ -27,7 +27,7 @@ class "Sam"
 			self.position.x = self.position.x + (5 * dt)
 		end
 		
-		self.screenPosition.x = self.position.y - self.scroll.x
+		self.screenPosition.x = self.position.x - self.scroll.x
 		self.screenPosition.y = self.position.y - self.scroll.y
 	end
 }
