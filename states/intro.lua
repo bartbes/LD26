@@ -1,9 +1,12 @@
 require "classes.TileMap"
+require "Classes/Sam"
 
 local intro = {}
 
 function intro:load()
 	self.timer = 0
+	samTex = love.graphics.newImage("SamTest.png")
+	sam = Sam({x=400,y=100},{x=0,y=0}, samTex)
 	self.map = TileMap("gfx/testsheet.png", {
 		"ab8YA",
 		"77n-+",
@@ -14,6 +17,7 @@ end
 
 function intro:update(dt)
 	self.timer = self.timer + dt
+	sam:update(dt)
 end
 
 function intro:draw()
@@ -22,6 +26,7 @@ function intro:draw()
 		500 + 50*math.cos(self.timer),
 		100, 100)
 	self.map:draw()
+		sam:draw()
 end
 
 return intro
