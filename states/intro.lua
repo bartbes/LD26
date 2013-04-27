@@ -30,7 +30,7 @@ end
 function intro:keypressed(key, unicode)
 	if key == " " then
 		sam:jump()
-	elseif key == "space" then
+	elseif key == "escape" then
 		love.event.push("quit)")
 	end
 end
