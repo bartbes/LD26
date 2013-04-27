@@ -22,12 +22,9 @@ function intro:update(dt)
 end
 
 function intro:draw()
-	love.graphics.rectangle('fill',
-		500 + 50*math.sin(self.timer),
-		500 + 50*math.cos(self.timer),
-		100, 100)
+	love.graphics.scale(2, 2)
 	self.map:draw()
-		sam:draw()
+	sam:draw()
 end
 
 return intro

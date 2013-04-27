@@ -44,7 +44,7 @@ class "Sam"
 		self.screenPosition.x = self.position.x - self.scroll.x
 		self.screenPosition.y = self.position.y - self.scroll.y
 		
-		if self.position.y < 500 then
+		if self.position.y < 300 then
 			self.onGround = false
 		else
 			self.onGround = true
