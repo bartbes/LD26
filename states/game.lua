@@ -20,7 +20,7 @@ end
 
 function game:draw()
 	love.graphics.scale(2, 2)
-	self.map:draw()
+	self.map:draw(sam.scroll.x, sam.scroll.y)
 	sam:draw()
 	drawFuelGuage()
 end
