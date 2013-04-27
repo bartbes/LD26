@@ -25,6 +25,7 @@ function intro:draw()
 	love.graphics.scale(2, 2)
 	self.map:draw()
 	sam:draw()
+	drawFuelGuage()
 end
 
 function intro:keypressed(key, unicode)
@@ -33,6 +34,21 @@ function intro:keypressed(key, unicode)
 	elseif key == "escape" then
 		love.event.push("quit")
 	end
+end
+
+function drawFuelGuage()
+	length = 32*(sam.fuel/100)
+	if sam.fuel < 25 then
+		love.graphics.setColor(191,55,59)
+	elseif sam.fuel < 50 then
+		love.graphics.setColor(233,235,58)
+	else
+		love.graphics.setColor(97,202,94)
+	end
+	love.graphics.rectangle("fill", 550, 10, length, 8 )
+	love.graphics.setColor(0,0,0)
+	love.graphics.rectangle("line", 550, 10, 32, 8 )
+	love.graphics.setColor(255,255,255)
 end
 
 return intro
