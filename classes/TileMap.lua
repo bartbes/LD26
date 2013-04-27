@@ -79,7 +79,7 @@ class "TileMap" {
 	isSolid = function(self, x, y)
 		if not self.tiles[y] then return false end
 		if not self.tiles[y][x] then return false end
-		return self.tiles[y][x] >= 52 -- 0 and on
+		return self.tiles[y][x] < 52 -- 0 and on
 	end,
 
 	fromFile = function(image, levelfile)
