@@ -28,6 +28,8 @@ end
 function game:keypressed(key, unicode)
 	if key == " " then
 		sam:jump()
+	elseif key == "b" then
+		sam:dash()
 	elseif key == "escape" then
 		love.event.push("quit")
 	end
