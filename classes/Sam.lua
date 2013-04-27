@@ -30,8 +30,16 @@ class "Sam"
 		end
 	end,
 	
-	--dash = function(self)
-		--if self.fuel > 25 then
+	dash = function(self)
+		if self.fuel > 25 then
+			self.fuel = self.fuel - 25
+			if self.facingRight then
+				self.velocity.x = 200
+			else
+				self.velocity.x = -200
+			end
+		 end
+	end,
 		
 	
 		
@@ -45,12 +53,16 @@ class "Sam"
 			self.acceleration.y =self.acceleration.y + 100
 		end
 		
-		if  self.onGround then
+		if  self.onGround and not self.dashing then
 			self.fuel = self.fuel + (160 * dt)
-		elseif love.keyboard.isDown(" ") and self.fuel > 0 then
+		end
+			
+		if not self.onGround and love.keyboard.isDown(" ") and self.fuel > 0 then
 			self.fuel = self.fuel - (80 * dt)
 			self.acceleration.y =self.acceleration.y - 150
 		end
+		
+		self.acceleration.x = - self.velocity.x
 		
 		if self.fuel > 100 then
 			self.fuel = 100
@@ -75,6 +87,10 @@ class "Sam"
 			self.velocity.y = -600
 		end
 		
+		if self.velocity.x < 50 and self.velocity.x > -50 then
+			self.velocity.x = 0
+		end
+		
 		if self.onGround and self.velocity.y > 0 then
 			self.velocity.y = 0
 		end
@@ -83,15 +99,16 @@ class "Sam"
 		self.position.x = self.position.x + self.velocity.x * dt
 		self.position.y = self.position.y + self.velocity.y * dt
 
-		if love.keyboard.isDown("left", "a") then
-			self.position.x = self.position.x - (50 * dt)
-			self.facingRight = false
-		end
+			if love.keyboard.isDown("left", "a") then
+				self.position.x = self.position.x - (50 * dt)
+				self.facingRight = false
+			end
 		
-		if love.keyboard.isDown("right", "d") then
-			self.position.x = self.position.x + (50 * dt)
-			self.facingRight = true
-		end
+			if love.keyboard.isDown("right", "d") then
+				self.position.x = self.position.x + (50 * dt)
+				self.facingRight = true
+			end
+
 
 		-- hit ground
 		if self.position.y >= 300 and self.velocity.y >= 0 then
