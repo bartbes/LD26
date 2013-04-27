@@ -6,7 +6,7 @@ local intro = {}
 
 function intro:load()
 	self.timer = 0
-	samTex = cache.image("gfx/SamTest.png")
+	samTex = cache.image("gfx/sam.png")
 	sam = Sam({x=400,y=100},{x=0,y=0}, samTex)
 	self.map = TileMap("gfx/testsheet.png", {
 		"ab8YA",
