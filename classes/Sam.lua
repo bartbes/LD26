@@ -10,6 +10,7 @@ class "Sam"
 		self.screenPosition = {x =0, y=0}
 		self.tex = tex
 		self.onGround = true
+		self.fuel = 100
 	end,
 	
 	draw = function(self)
@@ -26,17 +27,30 @@ class "Sam"
 	
 	update = function(self,dt)
 	--ACCELERATION
+	
+		self.acceleration.y = 0
 		-- fall when not on ground
-		if self.onGround then
-			self.acceleration.y = 0
-		else 
-			self.acceleration.y = 100
+		if not self.onGround then
+			self.acceleration.y =self.acceleration.y + 100
+		end
+		
+		if  self.onGround then
+			self.fuel = self.fuel + (160 * dt)
+		elseif love.keyboard.isDown(" ") and self.fuel > 0 then
+			self.fuel = self.fuel - (80 * dt)
+			self.acceleration.y =self.acceleration.y - 150
+		end
+		
+		if self.fuel > 100 then
+			self.fuel = 100
+		elseif self.fuel < 0 then
+			self.fuel = 0
 		end
 	
 	-- VELOCITY
 		self.velocity.x = self.velocity.x + self.acceleration.x * dt
 		self.velocity.y = self.velocity.y + self.acceleration.y * dt
-		
+
 		-- cap velocitiy
 		if self.velocity.x > 600 then
 			self.velocity.x = 600
