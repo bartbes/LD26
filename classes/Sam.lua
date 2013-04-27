@@ -67,11 +67,11 @@ class "Sam"
 		end
 
 		-- hit ground
-		if self.position.y <= 300 then
-			self.onGround = false
-		else
+		if self.position.y >= 300 and self.velocity.y >= 0 then
 			self.onGround = true
 			self.position.y = 300
+		else
+			self.onGround = false
 		end
 		
 		self.screenPosition.x = self.position.x - self.scroll.x
