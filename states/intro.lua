@@ -1,11 +1,12 @@
 require "classes.TileMap"
-require "Classes/Sam"
+require "classes.Sam"
+local cache = require "lib.cache"
 
 local intro = {}
 
 function intro:load()
 	self.timer = 0
-	samTex = love.graphics.newImage("SamTest.png")
+	samTex = cache.image("gfx/SamTest.png")
 	sam = Sam({x=400,y=100},{x=0,y=0}, samTex)
 	self.map = TileMap("gfx/testsheet.png", {
 		"ab8YA",
