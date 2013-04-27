@@ -27,4 +27,10 @@ function intro:draw()
 	sam:draw()
 end
 
+function intro:keypressed(key, unicode)
+	if key == " " then
+		sam:jump()
+	end
+end
+
 return intro
