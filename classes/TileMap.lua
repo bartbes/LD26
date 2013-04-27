@@ -7,7 +7,7 @@ local sheetsize = 8 * (tilesize+2)
 local function decodeTile(ch)
 	ch = ch:byte()
 	if ch >= 65 and ch <= 90 then
-		return 0 + (ch - 66)
+		return 0 + (ch - 65)
 	end
 	if ch >= 97 and ch <= 122 then
 		return 26 + (ch - 97)
@@ -52,6 +52,10 @@ class "TileMap" {
 			tilecount = tilecount + #self.tiles[y]
 		end
 
+		self:buildBatch()
+	end,
+
+	buildBatch = function(self)
 		self.batch = love.graphics.newSpriteBatch(self.sheet, tilecount, "static")
 		local quadcache = {}
 
@@ -70,6 +74,12 @@ class "TileMap" {
 
 	draw = function(self, ...)
 		return love.graphics.draw(self.batch, ...)
+	end,
+
+	isSolid = function(self, x, y)
+		if not self.tiles[y] then return false end
+		if not self.tiles[y][x] then return false end
+		return self.tiles[y][x] >= 52 -- 0 and on
 	end,
 
 	fromFile = function(image, levelfile)
