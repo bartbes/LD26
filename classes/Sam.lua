@@ -20,6 +20,7 @@ class "Sam"
 		self.rightFoot = {x=0,y=0}
 		self.rightHand = {x=0,y=0}
 		self.leftHand = {x=0,y=0}
+		self.jumping = false
 	end,
 	
 	draw = function(self)
@@ -34,11 +35,12 @@ class "Sam"
 	jump = function(self)
 		if self.onGround then
 			self.velocity.y = - 100
+			self.jumping = true
 		end
 	end,
 	
 	dash = function(self)
-		if self.fuel > 25 then
+		if self.fuel >= 25 then
 			self.fuel = self.fuel - 25
 			if self.facingRight then
 				self.velocity.x = 200
@@ -60,23 +62,13 @@ class "Sam"
 			self.acceleration.y =self.acceleration.y + 100
 		end
 		
-		if  self.onGround and not self.dashing then
-			self.fuel = self.fuel + (160 * dt)
-		end
-			
-		if not self.onGround and love.keyboard.isDown(" ") and self.fuel > 0 then
+		if not self.onGround and not self.jumping and love.keyboard.isDown(" ") and self.fuel > 0 then
 			self.fuel = self.fuel - (80 * dt)
-			self.acceleration.y =self.acceleration.y - 150
+			self.acceleration.y =self.acceleration.y - 200
 		end
 		
 		self.acceleration.x = - self.velocity.x
-		
-		if self.fuel > 100 then
-			self.fuel = 100
-		elseif self.fuel < 0 then
-			self.fuel = 0
-		end
-	
+
 	-- VELOCITY
 		self.velocity.x = self.velocity.x + self.acceleration.x * dt
 		self.velocity.y = self.velocity.y + self.acceleration.y * dt
@@ -100,6 +92,21 @@ class "Sam"
 		
 		if self.onGround and self.velocity.y > 0 then
 			self.velocity.y = 0
+		end
+		
+		if self.jumping and self.velocity.y >=0 then
+			self.jumping = false
+		end
+		
+		
+		if  self.onGround and not self.dashing and self.velocity.x == 0 then
+			self.fuel = self.fuel + (70 * dt)
+		end
+		
+		if self.fuel > 100 then
+			self.fuel = 100
+		elseif self.fuel < 0 then
+			self.fuel = 0
 		end
 		
 	--POSITION
