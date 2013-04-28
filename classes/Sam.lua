@@ -321,6 +321,9 @@ class "Sam"
 		end
 		
 		if self.firingLaser then
+			if not self.sfx.laser then
+				self.sfx.laser = sfx.play("laserHigh", true)
+			end
 			if self.facingRight then
 				self.laserCordinates.x = self.rightHand.x + self.scroll.x
 				self.laserCordinates.y = self.rightHand.y + self.scroll.y
@@ -347,7 +350,10 @@ class "Sam"
 					end					
 				end
 				self.laserCordinates.w =  (math.ceil((self.leftHand.x)/16)+i)*16 - self.leftHand.x
-			end		
+			end
+		elseif self.sfx.laser then
+			self.sfx.laser:stop()
+			self.sfx.laser = nil
 		end
 		
 		
