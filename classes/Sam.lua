@@ -125,7 +125,7 @@ class "Sam"
 	
 	interactWithTerminal = function(self)
 		if self.map:isTerminalTile(self.adjacentTile.x,self.adjacentTile.y) then
-			self.map.activateTerminal(self.adjacentTile.x,self.adjacentTile.y)
+			self.map:activateTerminal(self.adjacentTile.x,self.adjacentTile.y)
 		end
 	end,
 		
