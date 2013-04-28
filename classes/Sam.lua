@@ -35,6 +35,7 @@ class "Sam"
 		self.jumping = false
 		self.alive = true
 		self.levelComplete = false
+		self.extiguishing = false
 	end,
 	
 	draw = function(self)
@@ -136,7 +137,14 @@ class "Sam"
 				self.position.x = self.position.x + (70 * dt)
 				self.facingRight = true
 			end
-			
+		
+		if love.keyboard.isDown("x") then
+			self.extiguishing = true
+		else
+			self.extiguishing = false
+		end
+
+		
 		self:updateSensors()
 		
 		--ceiling
@@ -188,6 +196,22 @@ class "Sam"
 			or self.map:isDeadlyTile(math.ceil((self.leftHand.x+3)/16),math.ceil((self.leftHand.y)/16)+1) 
 			or self.map:isDeadlyTile(math.ceil((self.rightHand.x-3)/16)-1,math.ceil(self.rightHand.y/16)+1) then
 			self.alive = false
+		end
+		
+		if self.extiguishing then
+			local firePos ={x=0,y=0}
+			if self.facingRight then
+				firePos.x = math.ceil((self.rightFoot.x-3)/16)
+				firePos.y = math.floor(self.rightFoot.y/16)
+			else
+				firePos.x = math.ceil((self.leftFoot.x+3)/16)-1
+				firePos.y = math.floor(self.rightFoot.y/16)
+				
+			end
+			 
+			if self.map:isFireTile(firePos.x,firePos.y) then
+				self.map.extinguishTile(firePos.x,firePos.y)
+			end
 		end
 		
 		
