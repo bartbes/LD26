@@ -56,7 +56,7 @@ end
 
 class "TileMap" {
 	__init__ = function(self, classPath, image, description)
-		self.level = love.filesystem.load(classPath)()
+		self.level = love.filesystem.load(classPath)()()
 		self.sheet = cache.image(image)
 
 		local maxtiles = 0

@@ -16,8 +16,8 @@ lvl = class.private "Level1" (Level) {
 		return false
 	end,
 
-	getNextLevel = function(self, ...)
-		return lvl(...)
+	getNextLevel = function(self)
+		return lvl
 	end,
 
 	getLevelFile = function(self)
@@ -25,4 +25,4 @@ lvl = class.private "Level1" (Level) {
 	end,
 }
 
-return lvl(...)
+return lvl

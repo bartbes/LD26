@@ -27,7 +27,7 @@ function game:update(dt)
 		local nextlevel = self.map.level:getNextLevel()
 		if nextlevel then
 			love.timer.sleep(0.100)
-			state.switch(self, nextlevel:getLevelFile())
+			state.switch(self, nextlevel():getLevelFile())
 		else
 			state.switch(THE_END)
 		end
