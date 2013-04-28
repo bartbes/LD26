@@ -117,7 +117,12 @@ class "TileMap" {
 	
 	isWinningTile = function(self, x, y)
 		local target = self.level:getTarget()
-		return target.x == x and target.y == y
+		if target.x == x and target.y == y then
+			return true
+		end
+
+		local tile = self.tiles[y][x]
+		return self.level:isWinningTile(encodeTile(tile))
 	end,
 
 	getWidth = function(self)

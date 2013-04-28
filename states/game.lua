@@ -8,7 +8,9 @@ function game:load()
 	self.timer = 0
 	self.map = TileMap.fromFile("levels/lvl1.txt")
 	samTex = cache.image("gfx/sam.png")
-	sam = Sam(self.map.level:getSpawn(), samTex, self.map)
+	local spawn = self.map.level:getSpawn()
+	local pos = {x = spawn.x*16, y = spawn.y*16}
+	sam = Sam(pos, samTex, self.map)
 
 	love.graphics.setBackgroundColor(200, 100, 120)
 end
