@@ -1,4 +1,5 @@
 require "classes.Level"
+local Hacking = require "minigames.Hacking"
 
 local lvl
 lvl = class.private "Level1" (Level) {
@@ -22,6 +23,18 @@ lvl = class.private "Level1" (Level) {
 
 	getLevelFile = function(self)
 		return "levels/lvl1.txt"
+	end,
+
+	isTerminalTile = function(self, tile)
+		return true
+	end,
+
+	activateTerminal = function(self, map, x, y)
+		local minigame = Hacking()
+		function minigame.callback(success)
+			print("Hacked: " .. tostring(success))
+		end
+		return minigame
 	end,
 }
 
