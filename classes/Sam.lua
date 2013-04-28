@@ -4,14 +4,13 @@ local sfx = require "sfx"
 
 class "Sam"
 {	
-	__init__ = function(self, position, tex, map, lightTex, thrustParticle)
+	__init__ = function(self, position, tex, map, lightTex, thrustParticle, sprayParticle)
 		self.spawnPos = position
 		self.tex = tex
 		self.lightTex = lightTex
 		self.texWidth = tex:getWidth()
 		self.texHeight = tex:getHeight()
 		self.lightWidth = lightTex:getWidth()
-		self.thrustParticle = thrustParticle
 		self.sfx = {}
 
 		self.abilities = {
@@ -26,6 +25,7 @@ class "Sam"
 		self.map = map
 		self:spawn()
 		self:createThrustParticles()
+		self:createSprayParticles()
 		
 	end,
 	
@@ -40,6 +40,19 @@ class "Sam"
 		self.thrustSystem:setSpin( 1, 2 )
 		--self.thrustSystem:setSpread( 30 )
 		self.thrustSystem:stop()
+	end,
+	
+	createSprayParticles = function(self)
+		self.spraySystem = love.graphics.newParticleSystem(sprayParticle , 250)
+		self.spraySystem:setEmissionRate( 200 )	
+		self.spraySystem:setLifetime( -1 )
+		self.spraySystem:setParticleLife( 0.1, 0.2)
+		self.spraySystem:setEmissionRate( 200 )
+		self.spraySystem:setDirection( math.pi/2)
+		self.spraySystem:setSpeed( 0, 200 )
+		self.spraySystem:setSpin( 1, 2 )
+		--self.thrustSystem:setSpread( 30 )
+		self.spraySystem:stop()
 	end,
 	
 	spawn = function(self)

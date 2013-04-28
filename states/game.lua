@@ -12,9 +12,10 @@ function game:load(level)
 	samTex = cache.image("gfx/sam.png")
 	lightTex = cache.image("gfx/flashlight.png")
 	thrustParticle = cache.image("gfx/particle1.png")
+	sprayParticle = cache.image("gfx/spray.png")
 	local spawn = self.map.level:getSpawn()
 	local pos = {x = (spawn.x-1)*16, y = (spawn.y-1)*16}
-	sam = Sam(pos, samTex, self.map, lightTex, thrustParticel)
+	sam = Sam(pos, samTex, self.map, lightTex, thrustParticel, sprayParticle)
 
 	bgm.start()
 	love.graphics.setBackgroundColor(200, 100, 120)
