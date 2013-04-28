@@ -46,12 +46,12 @@ class "Sam"
 		self.spraySystem = love.graphics.newParticleSystem(sprayParticle , 250)
 		self.spraySystem:setEmissionRate( 200 )	
 		self.spraySystem:setLifetime( -1 )
-		self.spraySystem:setParticleLife( 0.1, 0.2)
-		self.spraySystem:setEmissionRate( 200 )
-		self.spraySystem:setDirection( math.pi/2)
-		self.spraySystem:setSpeed( 0, 200 )
-		self.spraySystem:setSpin( 1, 2 )
-		--self.thrustSystem:setSpread( 30 )
+		self.spraySystem:setParticleLife( 0.2, 0.4)
+		self.spraySystem:setEmissionRate( 400 )
+		self.spraySystem:setDirection(0)
+		self.spraySystem:setSpeed( 50, 100 )
+		self.spraySystem:setSpin( 2, 4 )
+		self.spraySystem:setSpread( 1 )
 		self.spraySystem:stop()
 	end,
 	
@@ -82,9 +82,11 @@ class "Sam"
 		if self.facingRight then
 			love.graphics.draw(self.thrustSystem,self.screenPosition.x+1, self.screenPosition.y+28)
 			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y)
+			love.graphics.draw(self.spraySystem,self.screenPosition.x + self.texWidth, self.screenPosition.y+25)
 		else
 			love.graphics.draw(self.thrustSystem,self.screenPosition.x + self.texWidth - 1, self.screenPosition.y+28,0,-1,1)
 			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y,0,-1,1,self.texWidth,0)		
+			love.graphics.draw(self.spraySystem,self.screenPosition.x, self.screenPosition.y+25,0,-1,1)
 		end
 		
 		if self.firingLaser then
@@ -150,6 +152,7 @@ class "Sam"
 	update = function(self,dt)
 	
 		self.thrustSystem:update(dt)
+		self.spraySystem:update(dt)
 	
 	--ACCELERATION
 	
@@ -317,14 +320,17 @@ class "Sam"
 				if not self.extinguishing then
 					self.sfx.extinguish = sfx.play("extinguish", true)
 					self.sfx.extinguishFade = 0
+					self.extinguishing = true
+					self.spraySystem:start()
+					
 				end
-				self.extinguishing = true
 			else
 				if self.extinguishing then
 					self.sfx.extinguish:stop()
 					self.sfx.extinguish = nil
-				end
-				self.extinguishing = false
+					self.extinguishing = false
+					self.spraySystem:stop()
+				end	
 			end
 		end
 		
