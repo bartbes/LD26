@@ -1,8 +1,14 @@
 local state = require "state"
+local menu = require "states.menu"
 local game = require "states.game"
 
-function love.load()
+function love.load(args)
 	love.graphics.setDefaultImageFilter("nearest", "nearest")
 	state.hook()
-	state.switch(game, "levels/lvl1.txt")
+
+	if args[2] == "menu" then
+		state.switch(menu)
+	else
+		state.switch(game, "levels/lvl1.txt")
+	end
 end
