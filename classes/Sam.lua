@@ -52,20 +52,27 @@ class "Sam"
 	draw = function(self)
 		if self.facingRight then
 			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y)
-			if self.flashlight then
-				love.graphics.draw(self.lightTex, (self.screenPosition.x + self.texWidth), self.screenPosition.y )	
-			end
 		else
 			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y,0,-1,1,self.texWidth,0)
-			if self.flashlight then
-				love.graphics.draw(self.lightTex,self.screenPosition.x , self.screenPosition.y,0,-1,1)	
-			end
 		end
 		
 		if self.firingLaser then
 			love.graphics.setColor(191,55,59)
 			love.graphics.rectangle("fill", self.laserCordinates.x, self.laserCordinates.y, self.laserCordinates.w, self.laserCordinates.h )
 			love.graphics.setColor(0,0,0)
+		end
+
+		if self.flashlight then
+			local x = self.screenPosition.x - 30
+			local sx = 1
+			if self.facingRight then
+				x = self.screenPosition.x + 46
+				sx = -1
+			end
+
+			love.graphics.setBlendMode("additive")
+			love.graphics.draw(self.lightTex, x, self.screenPosition.y, 0, sx, 1)
+			love.graphics.setBlendMode("alpha")
 		end
 	end,
 	
