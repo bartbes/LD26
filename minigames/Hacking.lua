@@ -28,8 +28,10 @@ Hacking = class.private "Hacking" (Minigame) {
 		Minigame.update(self, dt)
 
 		self.timer = self.timer + dt
-		if self.timer > 3 then
-			self:close(self.pos == #self.password)
+		if self.timer > 3 and not self.pos == #self.password then
+			self:close(false)
+		elseif self.timer > 6 then
+			self:close(true)
 		end
 	end,
 
@@ -56,6 +58,7 @@ Hacking = class.private "Hacking" (Minigame) {
 
 		love.graphics.print(">" .. self.address:sub(1, self.pos+1), 260, 140)
 		if self.pos < #self.password and not self.failed then
+			love.graphics.printf("Press", 240, 310, 800, "center")
 			love.graphics.printf(self.password[self.pos], 240, 330, 800, "center")
 		elseif not self.failed then
 			repeat
