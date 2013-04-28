@@ -20,7 +20,7 @@ class "Sam"
 	end,
 	
 	spawn = function(self)
-		self.position = {x=300,y=200}-- self.spawnPos
+		self.position = {x=self.spawnPos.x,y=self.spawnPos.y}
 		self.velocity = {x=0,y=0}
 		self.acceleration = {x=0,y=0}
 		self.scroll = scroll or{x=0,y=0}
