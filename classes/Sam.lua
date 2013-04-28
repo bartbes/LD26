@@ -4,6 +4,7 @@ require "classes.TileMap"
 class "Sam"
 {	
 	__init__ = function(self, position, tex, map)
+		self.spawnPos = position
 		self.tex = tex
 		self.texWidth = tex:getWidth()
 		self.texHeight = tex:getHeight()
@@ -15,11 +16,11 @@ class "Sam"
 		map.level:transferAbilities(self)
 
 		self.map = map
-		self:spawn(position)
+		self:spawn()
 	end,
 	
-	spawn = function(self, position)
-		self.position = position or {x=0,y=0}
+	spawn = function(self)
+		self.position = {x=300,y=200}-- self.spawnPos
 		self.velocity = {x=0,y=0}
 		self.acceleration = {x=0,y=0}
 		self.scroll = scroll or{x=0,y=0}

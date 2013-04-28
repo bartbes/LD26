@@ -5,7 +5,7 @@ lvl = class.private "Level1" (Level) {
 	__init__ = function(self)
 		Level.__init__(self,
 			{x = 5, y = 16},
-			{x = 4, y = 19},
+			{x = 4, y = 6},
 			{})
 	end,
 
