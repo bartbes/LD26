@@ -26,6 +26,7 @@ class "Sam"
 		self.map = map
 		self:spawn()
 		self:createThrustParticles()
+		
 	end,
 	
 	createThrustParticles = function(self)
