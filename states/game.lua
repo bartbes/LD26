@@ -11,9 +11,10 @@ function game:load(level)
 	self.map = TileMap.fromFile(level)
 	samTex = cache.image("gfx/sam.png")
 	lightTex = cache.image("gfx/flashlight.png")
+	thrustParticle = cache.image("gfx/particle1.png")
 	local spawn = self.map.level:getSpawn()
 	local pos = {x = (spawn.x-1)*16, y = (spawn.y-1)*16}
-	sam = Sam(pos, samTex, self.map, lightTex)
+	sam = Sam(pos, samTex, self.map, lightTex, thrustParticel)
 
 	bgm.start()
 

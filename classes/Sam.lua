@@ -4,13 +4,14 @@ local sfx = require "sfx"
 
 class "Sam"
 {	
-	__init__ = function(self, position, tex, map, lightTex)
+	__init__ = function(self, position, tex, map, lightTex, thrustParticle)
 		self.spawnPos = position
 		self.tex = tex
 		self.lightTex = lightTex
 		self.texWidth = tex:getWidth()
 		self.texHeight = tex:getHeight()
 		self.lightWidth = lightTex:getWidth()
+		self.thrustParticle = thrustParticle
 		self.sfx = {}
 
 		self.abilities = {
@@ -24,6 +25,20 @@ class "Sam"
 
 		self.map = map
 		self:spawn()
+		self:createThrustParticles()
+	end,
+	
+	createThrustParticles = function(self)
+		self.thrustSystem = love.graphics.newParticleSystem(thrustParticle , 250)
+		self.thrustSystem:setEmissionRate( 200 )	
+		self.thrustSystem:setLifetime( -1 )
+		self.thrustSystem:setParticleLife( 0.1, 0.2)
+		self.thrustSystem:setEmissionRate( 200 )
+		self.thrustSystem:setDirection( 1.6)
+		self.thrustSystem:setSpeed( 0, 200 )
+		self.thrustSystem:setSpin( 14, 26 )
+		--self.thrustSystem:setSpread( 30 )
+		self.thrustSystem:stop()
 	end,
 	
 	spawn = function(self)
@@ -52,8 +67,10 @@ class "Sam"
 	draw = function(self)
 		if self.facingRight then
 			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y)
+			love.graphics.draw(self.thrustSystem,self.screenPosition.x, self.screenPosition.y+24)
 		else
 			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y,0,-1,1,self.texWidth,0)
+			love.graphics.draw(self.thrustSystem,self.screenPosition.x + self.texWidth, self.screenPosition.y+24)
 		end
 		
 		if self.firingLaser then
@@ -75,6 +92,8 @@ class "Sam"
 			love.graphics.draw(self.lightTex, x, y, 0, sx, 1)
 			love.graphics.setBlendMode("alpha")
 		end
+		
+		
 	end,
 	
 	
@@ -115,6 +134,9 @@ class "Sam"
 		
 	
 	update = function(self,dt)
+	
+		self.thrustSystem:update(dt)
+	
 	--ACCELERATION
 	
 		self.acceleration.y = 0
@@ -125,6 +147,7 @@ class "Sam"
 		
 		if not self.onGround and not self.jumping and love.keyboard.isDown(" ") and self.fuel > 0 and self.abilities.rocketJump then
 			if not self.sfx.jetpack then
+				self.thrustSystem:start()
 				self.sfx.jetpack = sfx.play("jetpack")
 				self.sfx.jetpackTimer = 0.5
 			end
@@ -135,6 +158,7 @@ class "Sam"
 			self.sfx.jetpackTimer = self.sfx.jetpackTimer - dt
 		elseif self.sfx.jetpack then
 			self.sfx.jetpack:stop()
+			self.thrustSystem:stop()
 			self.sfx.jetpack = nil
 		end
 		
