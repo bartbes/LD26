@@ -143,11 +143,14 @@ class "TileMap" {
 	end,
 	
 	isTerminalTile = function(self, x, y)
-		return false
+		local tile = self.tiles[y][x]
+		return self.level:isTerminalTile(encodeTile(tile))
 	end,
 	
 	activateTerminal = function(self, x, y)
-		return false
+		if not self:isTerminalTile(x, y) then return false end
+		self.level:activateTerminal(x, y)
+		return true
 	end,
 	
 	

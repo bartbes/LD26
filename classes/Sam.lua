@@ -63,7 +63,7 @@ class "Sam"
 		if self.onGround then
 			self.velocity.y = - 100
 			self.jumping = true
-			sfx.play("jumpValve")
+			sfx.play("jumpValve", false, 0.60)
 		end
 	end,
 	
@@ -176,8 +176,7 @@ class "Sam"
 		end
 
 		if moving and not self.sfx.motor then
-			self.sfx.motor = sfx.play("motor")
-			self.sfx.motor:setLooping(true)
+			self.sfx.motor = sfx.play("motor", true)
 		end
 		if not moving and self.sfx.motor then
 			self.sfx.motor:stop()
@@ -203,7 +202,7 @@ class "Sam"
 			self.position.y = math.floor(self.position.y/16) * 16 
 
 			if not self.onGround then
-				sfx.play("land2")
+				sfx.play("land2", false, 0.75)
 			end
 			self.onGround = true
 			self:updateSensors()
@@ -256,8 +255,7 @@ class "Sam"
 		-- extinguisher
 		if love.keyboard.isDown("x") then
 			if not self.extinguishing then
-				self.sfx.extinguish = sfx.play("extinguish")
-				self.sfx.extinguish:setLooping(true)
+				self.sfx.extinguish = sfx.play("extinguish", true)
 				self.sfx.extinguishFade = 0
 			end
 			self.extinguishing = true
