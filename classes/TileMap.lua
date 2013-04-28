@@ -38,6 +38,7 @@ class "TileMap" {
 	__init__ = function(self, file, description)
 		self.sheet = cache.image(file)
 
+		local maxtiles = 0
 		self.tiles = {}
 		local tilecount = 0
 		for y, line in ipairs(description) do
@@ -49,14 +50,20 @@ class "TileMap" {
 				x = x + 1
 			end
 
+			if #self.tiles[y] > maxtiles then maxtiles = #self.tiles[y] end
+
 			tilecount = tilecount + #self.tiles[y]
 		end
+
+		self.tilecount = tilecount
+		self.width = maxtiles * tilesize
+		self.height = #self.tiles * tilesize
 
 		self:buildBatch()
 	end,
 
 	buildBatch = function(self)
-		self.batch = love.graphics.newSpriteBatch(self.sheet, tilecount, "static")
+		self.batch = love.graphics.newSpriteBatch(self.sheet, self.tilecount, "static")
 		local quadcache = {}
 
 		self.batch:bind()
@@ -72,14 +79,22 @@ class "TileMap" {
 		self.batch:unbind()
 	end,
 
-	draw = function(self, ...)
-		return love.graphics.draw(self.batch, ...)
+	draw = function(self, x, y, ...)
+		return love.graphics.draw(self.batch, math.floor(x), math.floor(y), ...)
 	end,
 
 	isSolid = function(self, x, y)
 		if not self.tiles[y] then return false end
 		if not self.tiles[y][x] then return false end
 		return self.tiles[y][x] < 52 -- 0 and on
+	end,
+
+	getWidth = function(self)
+		return self.width
+	end,
+
+	getHeight = function(self)
+		return self.height
 	end,
 
 	fromFile = function(image, levelfile)
