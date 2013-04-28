@@ -4,11 +4,13 @@ local sfx = require "sfx"
 
 class "Sam"
 {	
-	__init__ = function(self, position, tex, map)
+	__init__ = function(self, position, tex, map, lightTex)
 		self.spawnPos = position
 		self.tex = tex
+		self.lightTex = lightTex
 		self.texWidth = tex:getWidth()
 		self.texHeight = tex:getHeight()
+		self.lightWidth = lightTex:getWidth()
 		self.sfx = {}
 
 		self.abilities = {
@@ -50,8 +52,14 @@ class "Sam"
 	draw = function(self)
 		if self.facingRight then
 			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y)
+			if self.flashlight then
+				love.graphics.draw(self.lightTex, (self.screenPosition.x + self.texWidth), self.screenPosition.y )	
+			end
 		else
 			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y,0,-1,1,self.texWidth,0)
+			if self.flashlight then
+				love.graphics.draw(self.lightTex,self.screenPosition.x , self.screenPosition.y,0,-1,1)	
+			end
 		end
 		
 		if self.firingLaser then
