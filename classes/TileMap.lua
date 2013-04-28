@@ -26,6 +26,26 @@ local function decodeTile(ch)
 	error("Invalid tile!")
 end
 
+local function encodeTile(tile)
+	if tile < 26 then
+		return string.char(65 + tile - 0)
+	end
+	if tile < 52 then
+		return string.char(97 + tile - 26)
+	end
+	if tile < 62 then
+		return string.char(48 + tile - 52)
+	end
+	if tile == 62 then
+		return "+"
+	end
+	if tile == 63 then
+		return "-"
+	end
+
+	error("Invalid tile!")
+end
+
 local function generateQuad(tile)
 	local x = tile % 8
 	local y = math.floor(tile / 8)

@@ -8,6 +8,13 @@ local lvl = class.private "Level1" (Level) {
 			{})
 	end,
 
+	isDeadlyTile = function(self, tile)
+		if tile == "8" then
+			return true
+		end
+		return false
+	end,
+
 	getNextLevel = function(self)
 		return nil
 	end,
