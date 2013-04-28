@@ -73,9 +73,9 @@ function drawFuelGuage()
 	else
 		love.graphics.setColor(97,202,94)
 	end
-	love.graphics.rectangle("fill", 550, 10, length, 8 )
+	love.graphics.rectangle("fill", 350, 6, length, 7 )
 	love.graphics.setColor(0,0,0)
-	love.graphics.rectangle("line", 550, 10, 32, 8 )
+	love.graphics.rectangle("line", 350, 6, 32, 7 )
 	love.graphics.setColor(255,255,255)
 end
 
