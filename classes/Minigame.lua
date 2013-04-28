@@ -11,7 +11,7 @@ class "Minigame" {
 
 	keypressed = function(self, key, unicode)
 		if key == "escape" then
-			self:close()
+			self:close(false)
 		end
 	end,
 

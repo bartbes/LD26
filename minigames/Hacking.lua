@@ -21,6 +21,8 @@ Hacking = class.private "Hacking" (Minigame) {
 		self.timer = 0
 
 		self.font = cache.font("fonts/PrStart.ttf:16")
+		self.overlay = cache.image("gfx/hackOverlay.png")
+
 		love.graphics.setFont(self.font)
 	end,
 
@@ -28,7 +30,7 @@ Hacking = class.private "Hacking" (Minigame) {
 		Minigame.update(self, dt)
 
 		self.timer = self.timer + dt
-		if self.timer > 3 and not self.pos == #self.password then
+		if self.timer > 3 and self.pos ~= #self.password then
 			self:close(false)
 		elseif self.timer > 6 then
 			self:close(true)
@@ -85,6 +87,7 @@ Hacking = class.private "Hacking" (Minigame) {
 			love.graphics.print(">INTRUSION DETECTED, SHUTTING DOWN", 260, 160)
 		end
 		love.graphics.setColor(255, 255, 255)
+		love.graphics.draw(self.overlay, 240, 60)
 	end,
 }
 
