@@ -1,4 +1,5 @@
 local state = require "state"
+local cache = require "lib.cache"
 local game = require "states.game"
 --local credits = require "states.credits"
 
@@ -13,6 +14,9 @@ local entries = {
 
 function menu:load()
 	self.selection = 1
+
+	self.bigfont = cache.font("fonts/PrStart.ttf:32")
+	self.smallfont = cache.font("fonts/PrStart.ttf:26")
 end
 
 function menu:keypressed(key)
@@ -28,9 +32,11 @@ function menu:keypressed(key)
 end
 
 function menu:draw()
+	love.graphics.setFont(self.bigfont)
 	love.graphics.printf("S.A.M.", 0, 100, 1280, "center")
-	love.graphics.printf("Rescue in Space", 0, 120, 1280, "center")
+	love.graphics.printf("Rescue in Space", 0, 140, 1280, "center")
 
+	love.graphics.setFont(self.smallfont)
 	local left, right = "> ", " <"
 	local str
 	for i, v in ipairs(entries) do
@@ -39,7 +45,7 @@ function menu:draw()
 			str = left .. str .. right
 		end
 
-		love.graphics.printf(str, 0, 200+20*i, 1280, "center")
+		love.graphics.printf(str, 0, 200+36*i, 1280, "center")
 	end
 end
 
