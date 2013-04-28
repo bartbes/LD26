@@ -1,4 +1,5 @@
 require "classes.Minigame"
+local cache = require "lib.cache"
 
 local keys = {"0", "1"}
 
@@ -18,6 +19,9 @@ Hacking = class.private "Hacking" (Minigame) {
 
 		self.pos = 1
 		self.timer = 0
+
+		self.font = cache.font("fonts/PrStart.ttf:16")
+		love.graphics.setFont(self.font)
 	end,
 
 	update = function(self, dt)
