@@ -178,8 +178,6 @@ class "Sam"
 		if self.map:isWinningTile(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16)) 
 			or	self.map:isWinningTile(math.ceil((self.rightFoot.x-3)/16)-1,math.floor(self.rightFoot.y/16))	then
 			self.levelComplete = true
-			--temp test
-			self:spawn({x=300,y=200})
 			self:updateSensors()
 		end
 		
