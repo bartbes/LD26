@@ -3,24 +3,29 @@ require "classes.TileMap"
 
 class "Sam"
 {	
-	__init__ = function(self, position, velocity, tex, map)
+	__init__ = function(self, position, tex, map)
+		self.tex = tex
+		self.texWidth = tex:getWidth()
+		self.texHeight = tex:getHeight()
+		self.map = map
+		self:spawn(position)
+	end,
+	
+	spawn = function(self, position)
 		self.position = position or {x=0,y=0}
 		self.velocity = {x=0,y=0}
 		self.acceleration = {x=0,y=0}
 		self.scroll = scroll or{x=0,y=0}
 		self.screenPosition = {x =0, y=0}
-		self.tex = tex
 		self.onGround = true
 		self.fuel = 100
 		self.facingRight = true
-		self.texWidth = tex:getWidth()
-		self.texHeight = tex:getHeight()
-		self.map = map
 		self.leftFoot = {x=0,y=0}
 		self.rightFoot = {x=0,y=0}
 		self.rightHand = {x=0,y=0}
 		self.leftHand = {x=0,y=0}
 		self.jumping = false
+		self.alive = true
 	end,
 	
 	draw = function(self)
@@ -114,12 +119,12 @@ class "Sam"
 		self.position.y = self.position.y + self.velocity.y * dt
 
 			if love.keyboard.isDown("left", "a") then
-				self.position.x = self.position.x - (50 * dt)
+				self.position.x = self.position.x - (70 * dt)
 				self.facingRight = false
 			end
 		
 			if love.keyboard.isDown("right", "d") then
-				self.position.x = self.position.x + (50 * dt)
+				self.position.x = self.position.x + (70 * dt)
 				self.facingRight = true
 			end
 			
@@ -158,7 +163,11 @@ class "Sam"
 			self.velocity.x = 0
 		end
 		
-
+		
+		if(self.position.y > 720) then
+			self.alive = false
+		end
+		
 		self.scroll.x = math.min(0, -self.position.x + 300)
 		self.scroll.x = math.max(self.scroll.x, -self.map:getWidth()+640)
 		--self.scroll.x = 20

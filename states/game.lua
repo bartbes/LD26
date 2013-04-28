@@ -8,14 +8,18 @@ function game:load()
 	self.timer = 0
 	self.map = TileMap.fromFile("gfx/tileset.png", "levels/lvl1.txt")
 	samTex = cache.image("gfx/sam.png")
-	sam = Sam({x=300,y=200},{x=0,y=0}, samTex, self.map)
+	sam = Sam({x=300,y=200}, samTex, self.map)
 
 	love.graphics.setBackgroundColor(200, 100, 120)
 end
 
 function game:update(dt)
 	self.timer = self.timer + dt
-	sam:update(dt)
+	if sam.alive then
+		sam:update(dt)
+	else
+		sam:spawn({x=300,y=200})
+	end
 end
 
 function game:draw()
