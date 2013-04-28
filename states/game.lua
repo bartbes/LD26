@@ -21,7 +21,7 @@ function game:update(dt)
 	if sam.alive then
 		sam:update(dt)
 	else
-		sam:spawn({x=300,y=200})
+		sam:spawn()
 	end
 	if sam.levelComplete then
 		local nextlevel = self.map.level:getNextLevel()
