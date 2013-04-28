@@ -84,7 +84,10 @@ class "TileMap" {
 	end,
 
 	buildBatch = function(self)
-		self.batch = love.graphics.newSpriteBatch(self.sheet, self.tilecount, "static")
+		if not self.batch then
+			self.batch = love.graphics.newSpriteBatch(self.sheet, self.tilecount, "static")
+		end
+
 		local quadcache = {}
 
 		self.batch:bind()
@@ -128,6 +131,15 @@ class "TileMap" {
 	isFireTile = function(self, x, y)
 		local tile = self.tiles[y][x]
 		return self.level:isFireTile(encodeTile(tile))
+	end,
+
+	extinguishTile = function(self, x, y)
+		if not self:isFireTile(x, y) then return false end
+		local tile = self.tiles[y][x]
+		local newtile = self.level:extinguishTile(encodeTile(tile))
+		self.tiles[y][x] = decodeTile(newtile)
+		self:buildBatch()
+		return true
 	end,
 
 	getWidth = function(self)

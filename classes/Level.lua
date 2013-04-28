@@ -27,6 +27,10 @@ class "Level" {
 		return false
 	end,
 
+	extinguishTile = function(self, tile)
+		return "0"
+	end,
+
 	transferAbilities = function(self, sam)
 		for i, v in pairs(sam.abilities) do
 			if self.abilities[i] ~= nil then
