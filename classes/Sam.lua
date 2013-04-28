@@ -36,6 +36,8 @@ class "Sam"
 		self.alive = true
 		self.levelComplete = false
 		self.extiguishing = false
+		self.adjacentTile = {x=0,y=0}
+		self.flashlight = false
 	end,
 	
 	draw = function(self)
@@ -64,6 +66,17 @@ class "Sam"
 			end
 		 end
 	end,
+	
+	toggleLight = function(self)
+		self.flashlight = not self.flashlight
+	end
+	
+	interactWithTerminal = function(self)
+		if self.map:isTerminalTile(self.adjacentTile.x,self.adjacentTile.y) then
+			self.map.activateTerminal(self.adjacentTile.x,self.adjacentTile.y)
+		end
+	end,
+		
 		
 	
 		
@@ -138,11 +151,7 @@ class "Sam"
 				self.facingRight = true
 			end
 		
-		if love.keyboard.isDown("x") then
-			self.extiguishing = true
-		else
-			self.extiguishing = false
-		end
+		
 
 		
 		self:updateSensors()
@@ -198,23 +207,26 @@ class "Sam"
 			self.alive = false
 		end
 		
-		if self.extiguishing then
-			local firePos ={x=0,y=0}
-			if self.facingRight then
-				firePos.x = math.ceil((self.rightFoot.x-3)/16)
-				firePos.y = math.floor(self.rightFoot.y/16)
+		if self.facingRight then
+				self.adjacentTile.x = math.ceil((self.rightFoot.x-3)/16)
+				self.adjacentTile.y = math.floor(self.rightFoot.y/16)
 			else
-				firePos.x = math.ceil((self.leftFoot.x+3)/16)-1
-				firePos.y = math.floor(self.rightFoot.y/16)
-				
-			end
-			 
-			if self.map:isFireTile(firePos.x,firePos.y) then
-				self.map.extinguishTile(firePos.x,firePos.y)
-			end
+				self.adjacentTile.x = math.ceil((self.leftFoot.x+3)/16)-1
+				self.adjacentTile.y = math.floor(self.rightFoot.y/16)
 		end
 		
 		
+		if love.keyboard.isDown("x") then
+			self.extiguishing = true
+		else
+			self.extiguishing = false
+		end
+				
+		if self.extiguishing and self.map:isFireTile(self.adjacentTile.x,self.adjacentTile.y) then
+			self.map.extinguishTile(self.adjacentTile.x,self.adjacentTile.y)
+		end
+		
+		--TODO flashlight
 		
 		if(self.position.y > 720) then
 			self.alive = false

@@ -46,6 +46,10 @@ function game:keypressed(key, unicode)
 		sam:jump()
 	elseif key == "b" then
 		sam:dash()
+	elseif key == "i" then
+		sam:interactWithTerminal()
+	elseif key == "f" then
+		sam:toggleLight()
 	elseif key == "escape" then
 		love.event.push("quit")
 	end

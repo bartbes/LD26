@@ -141,6 +141,14 @@ class "TileMap" {
 		self:buildBatch()
 		return true
 	end,
+	
+	isTerminalTile = function(self, x, y)
+		return false
+	end,
+	
+	activateTerminal = function(self, x, y)
+		return false
+	end,
 
 	getWidth = function(self)
 		return self.width
