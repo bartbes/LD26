@@ -31,11 +31,19 @@ class "Level" {
 		return false
 	end,
 
+	isDestructableTile = function(self, tile)
+		return false
+	end,
+
 	extinguishTile = function(self, tile)
 		return "0"
 	end,
 
 	activateTerminal = function(self, x, y)
+	end,
+
+	destroyTile = function(self, tile, x, y)
+		return "0"
 	end,
 
 	transferAbilities = function(self, sam)
