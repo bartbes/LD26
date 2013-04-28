@@ -2,6 +2,7 @@ require "classes.TileMap"
 require "classes.Sam"
 local cache = require "lib.cache"
 local state = require "state"
+local bgm = require "bgm"
 
 local game = {}
 
@@ -14,11 +15,18 @@ function game:load(level)
 	local pos = {x = (spawn.x-1)*16, y = (spawn.y-1)*16}
 	sam = Sam(pos, samTex, self.map, lightTex)
 
+	bgm.start()
+
 	love.graphics.setBackgroundColor(200, 100, 120)
+end
+
+function game:unload()
+	bgm.stop()
 end
 
 function game:update(dt)
 	self.timer = self.timer + dt
+	bgm.update()
 	if sam.alive then
 		sam:update(dt)
 	else
