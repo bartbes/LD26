@@ -37,7 +37,7 @@ class "Sam"
 		self.jumping = false
 		self.alive = true
 		self.levelComplete = false
-		self.extiguishing = false
+		self.extinguishing = false
 		self.adjacentTile = {x=0,y=0}
 		self.flashlight = false
 		self.firingLaser = false
@@ -75,6 +75,7 @@ class "Sam"
 			else
 				self.velocity.x = -200
 			end
+			sfx.play("blip")
 		 end
 	end,
 	
@@ -104,9 +105,13 @@ class "Sam"
 		if not self.onGround and not self.jumping and love.keyboard.isDown(" ") and self.fuel > 0 and self.abilities.rocketJump then
 			if not self.sfx.jetpack then
 				self.sfx.jetpack = sfx.play("jetpack")
+				self.sfx.jetpackTimer = 0.5
 			end
 			self.fuel = self.fuel - (80 * dt)
 			self.acceleration.y =self.acceleration.y - 200
+		elseif self.sfx.jetpack and self.sfx.jetpackTimer > 0 then
+			self.sfx.jetpack:setVolume(self.sfx.jetpackTimer*2)
+			self.sfx.jetpackTimer = self.sfx.jetpackTimer - dt
 		elseif self.sfx.jetpack then
 			self.sfx.jetpack:stop()
 			self.sfx.jetpack = nil
@@ -198,7 +203,7 @@ class "Sam"
 			self.position.y = math.floor(self.position.y/16) * 16 
 
 			if not self.onGround then
-				sfx.play("land")
+				sfx.play("land2")
 			end
 			self.onGround = true
 			self:updateSensors()
@@ -250,12 +255,26 @@ class "Sam"
 		
 		-- extinguisher
 		if love.keyboard.isDown("x") then
-			self.extiguishing = true
+			if not self.extinguishing then
+				self.sfx.extinguish = sfx.play("extinguish")
+				self.sfx.extinguish:setLooping(true)
+				self.sfx.extinguishFade = 0
+			end
+			self.extinguishing = true
 		else
-			self.extiguishing = false
+			if self.extinguishing then
+				self.sfx.extinguish:stop()
+				self.sfx.extinguish = nil
+			end
+			self.extinguishing = false
+		end
+
+		if self.sfx.extinguish and self.sfx.extinguishFade < 1 then
+			self.sfx.extinguishFade = math.min(1, self.sfx.extinguishFade + 6*dt)
+			self.sfx.extinguish:setVolume(self.sfx.extinguishFade)
 		end
 				
-		if self.extiguishing and self.map:isFireTile(self.adjacentTile.x,self.adjacentTile.y) then
+		if self.extinguishing and self.map:isFireTile(self.adjacentTile.x,self.adjacentTile.y) then
 			self.map.extinguishTile(self.adjacentTile.x,self.adjacentTile.y)
 		end
 		
