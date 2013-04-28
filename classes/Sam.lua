@@ -72,7 +72,7 @@ class "Sam"
 	
 	toggleLight = function(self)
 		self.flashlight = not self.flashlight
-	end
+	end,
 	
 	interactWithTerminal = function(self)
 		if self.map:isTerminalTile(self.adjacentTile.x,self.adjacentTile.y) then
