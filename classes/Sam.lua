@@ -139,16 +139,16 @@ class "Sam"
 		self:updateSensors()
 		
 		--ceiling
-		if self.map:isSolid(math.ceil((self.leftHand.x+2)/16),math.ceil((self.leftHand.y)/16)) 
-			or self.map:isSolid(math.ceil((self.rightHand.x-2)/16)-1,math.ceil(self.rightHand.y/16)) then
+		if self.map:isSolid(math.ceil((self.leftHand.x+3)/16),math.ceil((self.leftHand.y)/16)) 
+			or self.map:isSolid(math.ceil((self.rightHand.x-3)/16)-1,math.ceil(self.rightHand.y/16)) then
 			self.position.y = (math.ceil((self.position.y +7 )/16) * 16 ) -7
 			self.velocity.y = 0
 			self:updateSensors()
 		end
 		
 		--floor
-		if self.map:isSolid(math.ceil((self.leftFoot.x+2)/16),math.floor(self.leftFoot.y/16)+1) 
-			or	self.map:isSolid(math.ceil((self.rightFoot.x-2)/16)-1,math.floor(self.rightFoot.y/16)+1)	then
+		if self.map:isSolid(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16)+1) 
+			or	self.map:isSolid(math.ceil((self.rightFoot.x-3)/16)-1,math.floor(self.rightFoot.y/16)+1)	then
 			self.position.y = math.floor(self.position.y/16) * 16 
 			self.onGround = true
 			self:updateSensors()
@@ -157,16 +157,16 @@ class "Sam"
 		end
 		
 		--left
-		if self.map:isSolid(math.ceil(self.leftFoot.x/16),math.ceil((self.leftFoot.y-2)/16))
-			or self.map:isSolid(math.ceil(self.leftHand.x/16),math.ceil((self.leftHand.y+2)/16))	then
+		if self.map:isSolid(math.ceil(self.leftFoot.x/16),math.ceil((self.leftFoot.y-3)/16))
+			or self.map:isSolid(math.ceil(self.leftHand.x/16),math.ceil((self.leftHand.y+3)/16))	then
 			self.position.x =  math.ceil(self.position.x/16) * 16 
 			self.velocity.x = 0
 			self:updateSensors()
 		end
 		
 		--right
-		if self.map:isSolid(math.floor((self.rightFoot.x)/16),math.ceil((self.rightFoot.y-2)/16))
-			or self.map:isSolid(math.floor((self.rightHand.x)/16),math.ceil((self.rightHand.y+2)/16))	then
+		if self.map:isSolid(math.floor((self.rightFoot.x)/16),math.ceil((self.rightFoot.y-3)/16))
+			or self.map:isSolid(math.floor((self.rightHand.x)/16),math.ceil((self.rightHand.y+3)/16))	then
 			self.position.x = (math.floor((self.position.x )/16) * 16) 
 			self.velocity.x = 0
 			self:updateSensors()
@@ -175,16 +175,19 @@ class "Sam"
 		
 		
 		--inWinningTile
-		if self.map:isWinningTile(math.ceil((self.leftFoot.x)/16),math.floor(self.leftFoot.y/16)) 
-			or	self.map:isWinningTile(math.ceil((self.rightFoot.x)/16)-1,math.floor(self.rightFoot.y/16))	then
+		if self.map:isWinningTile(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16)) 
+			or	self.map:isWinningTile(math.ceil((self.rightFoot.x-3)/16)-1,math.floor(self.rightFoot.y/16))	then
 			self.levelComplete = true
+			--temp test
+			self:spawn({x=300,y=200})
+			self:updateSensors()
 		end
 		
 		--inDeadlyTile
-		if self.map:isDeadlyTile(math.ceil((self.leftFoot.x+2)/16),math.floor(self.leftFoot.y/16)) 
-			or self.map:isDeadlyTile(math.ceil((self.rightFoot.x-2)/16)-1,math.floor(self.rightFoot.y/16))
-			or self.map:isDeadlyTile(math.ceil((self.leftHand.x+2)/16),math.ceil((self.leftHand.y)/16)+1) 
-			or self.map:isDeadlyTile(math.ceil((self.rightHand.x-2)/16)-1,math.ceil(self.rightHand.y/16)+1) then
+		if self.map:isDeadlyTile(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16)) 
+			or self.map:isDeadlyTile(math.ceil((self.rightFoot.x-3)/16)-1,math.floor(self.rightFoot.y/16))
+			or self.map:isDeadlyTile(math.ceil((self.leftHand.x+3)/16),math.ceil((self.leftHand.y)/16)+1) 
+			or self.map:isDeadlyTile(math.ceil((self.rightHand.x-3)/16)-1,math.ceil(self.rightHand.y/16)+1) then
 			self.alive = false
 		end
 		

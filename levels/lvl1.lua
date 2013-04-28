@@ -3,8 +3,8 @@ require "classes.Level"
 local lvl = class.private "Level1" (Level) {
 	__init__ = function(self)
 		Level.__init__(self,
-			{x = 18, y = 16},
-			{x = 99, y = 12},
+			{x = 5, y = 16},
+			{x = 4, y = 19},
 			{})
 	end,
 
