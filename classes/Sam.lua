@@ -7,6 +7,13 @@ class "Sam"
 		self.tex = tex
 		self.texWidth = tex:getWidth()
 		self.texHeight = tex:getHeight()
+
+		self.abilities = {
+			rocketJump = true,
+			boost = true,
+		}
+		map.level:transferAbilities(self)
+
 		self.map = map
 		self:spawn(position)
 	end,
@@ -45,7 +52,7 @@ class "Sam"
 	end,
 	
 	dash = function(self)
-		if self.fuel >= 25 then
+		if self.fuel >= 25 and self.abilities.boost then
 			self.fuel = self.fuel - 25
 			if self.facingRight then
 				self.velocity.x = 200
@@ -67,7 +74,7 @@ class "Sam"
 			self.acceleration.y =self.acceleration.y + 100
 		end
 		
-		if not self.onGround and not self.jumping and love.keyboard.isDown(" ") and self.fuel > 0 then
+		if not self.onGround and not self.jumping and love.keyboard.isDown(" ") and self.fuel > 0 and self.abilities.rocketJump then
 			self.fuel = self.fuel - (80 * dt)
 			self.acceleration.y =self.acceleration.y - 200
 		end

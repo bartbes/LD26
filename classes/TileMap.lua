@@ -35,8 +35,9 @@ local function generateQuad(tile)
 end
 
 class "TileMap" {
-	__init__ = function(self, file, description)
-		self.sheet = cache.image(file)
+	__init__ = function(self, classPath, image, description)
+		self.level = love.filesystem.load(classPath)()
+		self.sheet = cache.image(image)
 
 		local maxtiles = 0
 		self.tiles = {}
@@ -104,6 +105,7 @@ class "TileMap" {
 		end
 
 		local image = table.remove(desc, 1)
-		return TileMap(image, desc)
+		local classpath = levelfile:gsub("%.[^%.]+$", ".lua")
+		return TileMap(classpath, image, desc)
 	end,
 }
