@@ -152,7 +152,8 @@ class "Sam"
 		end
 		
 
-		self.scroll.x = -self.position.x + 300
+		self.scroll.x = math.min(0, -self.position.x + 300)
+		self.scroll.x = math.max(self.scroll.x, -self.map:getWidth()+640)
 		--self.scroll.x = 20
 		self.screenPosition.x = self.position.x + self.scroll.x
 		self.screenPosition.y = self.position.y + self.scroll.y	
