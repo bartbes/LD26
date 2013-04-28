@@ -149,6 +149,15 @@ class "TileMap" {
 	activateTerminal = function(self, x, y)
 		return false
 	end,
+	
+	
+	isDestroyable = function(self, x, y)
+		return false
+	end,	
+	
+	DestroyTile = function(self, x, y)
+		return false
+	end,
 
 	getWidth = function(self)
 		return self.width

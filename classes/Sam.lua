@@ -297,15 +297,31 @@ class "Sam"
 		
 		if self.firingLaser then
 			if self.facingRight then
-				self.laserCordinates.x = self.rightHand.x + self.scroll.x 
-				self.laserCordinates.y = self.rightHand.y + self.scroll.y 
-				self.laserCordinates.w = 30
-				self.laserCordinates.h = 2				
+				self.laserCordinates.x = self.rightHand.x + self.scroll.x
+				self.laserCordinates.y = self.rightHand.y + self.scroll.y
+				self.laserCordinates.h = 2	
+				
+				local i = 0
+				while  not self.map:isSolid(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y+3)/16)) do 
+					i = i+1
+					if self.map:isDestroyable(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y+3)/16)) then
+						self.map:DestroyTile(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y+3)/16)) 
+					end
+				end
+				self.laserCordinates.w =  (math.ceil((self.rightHand.x)/16)+i-1)*16 - self.rightHand.x
 			else
  				self.laserCordinates.x = self.leftHand.x + self.scroll.x 
 				self.laserCordinates.y = self.leftHand.y + self.scroll.y	
-				self.laserCordinates.w = -30
 				self.laserCordinates.h = 2
+
+				local i = 0
+				while  not self.map:isSolid(math.ceil((self.leftHand.x)/16)+i,math.ceil((self.leftHand.y+3)/16)) do 
+					i = i-1	
+					if self.map:isDestroyable(math.ceil((self.leftHand.x)/16)+i,math.ceil((self.leftHand.y+3)/16)) then
+						self.map:DestroyTile(math.ceil((self.leftHand.x)/16)+i,math.ceil((self.leftHand.y+3)/16)) 
+					end					
+				end
+				self.laserCordinates.w =  (math.ceil((self.leftHand.x)/16)+i)*16 - self.leftHand.x
 			end		
 		end
 		
