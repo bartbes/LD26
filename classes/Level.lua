@@ -27,8 +27,15 @@ class "Level" {
 		return false
 	end,
 
+	isTerminalTile = function(self, tile)
+		return false
+	end,
+
 	extinguishTile = function(self, tile)
 		return "0"
+	end,
+
+	activateTerminal = function(self, x, y)
 	end,
 
 	transferAbilities = function(self, sam)
