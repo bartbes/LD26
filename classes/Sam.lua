@@ -14,6 +14,9 @@ class "Sam"
 		self.abilities = {
 			rocketJump = true,
 			boost = true,
+			flashlight = true,
+			extinguisher = true,
+			laser = true
 		}
 		map.level:transferAbilities(self)
 
@@ -80,7 +83,9 @@ class "Sam"
 	end,
 	
 	toggleLight = function(self)
-		self.flashlight = not self.flashlight
+		if self.abilities.flashlight then
+			self.flashlight = not self.flashlight
+		end
 	end,
 	
 	interactWithTerminal = function(self)
@@ -253,19 +258,22 @@ class "Sam"
 		end
 		
 		-- extinguisher
-		if love.keyboard.isDown("x") then
-			if not self.extinguishing then
-				self.sfx.extinguish = sfx.play("extinguish", true)
-				self.sfx.extinguishFade = 0
+		if self.abilities.extinguisher then
+			if love.keyboard.isDown("x") then
+				if not self.extinguishing then
+					self.sfx.extinguish = sfx.play("extinguish", true)
+					self.sfx.extinguishFade = 0
+				end
+				self.extinguishing = true
+			else
+				if self.extinguishing then
+					self.sfx.extinguish:stop()
+					self.sfx.extinguish = nil
+				end
+				self.extinguishing = false
 			end
-			self.extinguishing = true
-		else
-			if self.extinguishing then
-				self.sfx.extinguish:stop()
-				self.sfx.extinguish = nil
-			end
-			self.extinguishing = false
 		end
+		
 
 		if self.sfx.extinguish and self.sfx.extinguishFade < 1 then
 			self.sfx.extinguishFade = math.min(1, self.sfx.extinguishFade + 6*dt)
@@ -287,7 +295,7 @@ class "Sam"
 		self.screenPosition.y = self.position.y + self.scroll.y	
 		
 				-- Laser
-		if love.keyboard.isDown("l") then
+		if love.keyboard.isDown("l") and self.abilities.laser then
 			self.firingLaser = true
 		else
 			self.firingLaser = false
