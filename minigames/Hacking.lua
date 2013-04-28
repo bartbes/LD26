@@ -13,7 +13,7 @@ Hacking = class.private "Hacking" (Minigame) {
 			table.insert(self.password, keys[i])
 		end
 
-		self.address = math.random(0x10000000, 0xFFFFFFFF)
+		self.address = math.random(0x10000000, 0x7FFFFFFF)
 		self.address = ("0x%08x"):format(self.address)
 
 		self.pos = 1
