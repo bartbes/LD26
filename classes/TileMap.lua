@@ -110,12 +110,14 @@ class "TileMap" {
 		return self.tiles[y][x] < 52 -- 0 and on
 	end,
 	
-	isDeathTile = function(self, x, y)
-		return false
+	isDeadlyTile = function(self, x, y)
+		local tile = self.tiles[y][x]
+		return self.level:isDeadlyTile(encodeTile(tile))
 	end,
 	
-	isWiningTile = function(self, x, y)
-		return false
+	isWinningTile = function(self, x, y)
+		local target = self.level:getTarget()
+		return target.x == x and target.y == y
 	end,
 
 	getWidth = function(self)

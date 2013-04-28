@@ -9,7 +9,7 @@ local lvl = class.private "Level1" (Level) {
 	end,
 
 	isDeadlyTile = function(self, tile)
-		if tile == "8" then
+		if tile == "5" then
 			return true
 		end
 		return false
