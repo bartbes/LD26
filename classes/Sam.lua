@@ -79,22 +79,23 @@ class "Sam"
 	end,
 	
 	draw = function(self)
-		if self.facingRight then
-			love.graphics.draw(self.thrustSystem,self.screenPosition.x+1, self.screenPosition.y+28)
-			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y)
-			love.graphics.draw(self.spraySystem,self.screenPosition.x + self.texWidth, self.screenPosition.y+25)
-		else
-			love.graphics.draw(self.thrustSystem,self.screenPosition.x + self.texWidth - 1, self.screenPosition.y+28,0,-1,1)
-			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y,0,-1,1,self.texWidth,0)		
-			love.graphics.draw(self.spraySystem,self.screenPosition.x, self.screenPosition.y+25,0,-1,1)
-		end
-		
+	
 		if self.firingLaser then
 			love.graphics.setColor(191,55,59)
 			love.graphics.rectangle("fill", self.laserCordinates.x, self.laserCordinates.y, self.laserCordinates.w, self.laserCordinates.h )
 			love.graphics.setColor(255,255,255)
 		end
 
+		if self.facingRight then
+			love.graphics.draw(self.thrustSystem,self.screenPosition.x+1, self.screenPosition.y+28)
+			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y)
+			love.graphics.draw(self.spraySystem,self.screenPosition.x -1 + self.texWidth, self.screenPosition.y+25)
+		else
+			love.graphics.draw(self.thrustSystem,self.screenPosition.x + self.texWidth - 1, self.screenPosition.y+28,0,-1,1)
+			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y,0,-1,1,self.texWidth,0)		
+			love.graphics.draw(self.spraySystem,self.screenPosition.x +1, self.screenPosition.y+25,0,-1,1)
+		end
+		
 		if self.flashlight then
 			local x = self.screenPosition.x - 30
 			local y = self.screenPosition.y + 18
@@ -108,7 +109,6 @@ class "Sam"
 			love.graphics.draw(self.lightTex, x, y, 0, sx, 1)
 			love.graphics.setBlendMode("alpha")
 		end
-		
 		
 	end,
 	
@@ -369,8 +369,8 @@ class "Sam"
 				self.sfx.laser = sfx.play("laserHigh", true)
 			end
 			if self.facingRight then
-				self.laserCordinates.x = self.rightHand.x + self.scroll.x
-				self.laserCordinates.y = self.rightHand.y + self.scroll.y
+				self.laserCordinates.x = self.rightHand.x + self.scroll.x -5
+				self.laserCordinates.y = self.rightHand.y + self.scroll.y - 1
 				self.laserCordinates.h = 2	
 				
 				local i = 0
@@ -380,10 +380,10 @@ class "Sam"
 						self.map:destroyTile(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y+3)/16)) 
 					end
 				end
-				self.laserCordinates.w =  (math.ceil((self.rightHand.x)/16)+i-1)*16 - self.rightHand.x
+				self.laserCordinates.w =  (math.ceil((self.rightHand.x)/16)+i-1)*16 + 5 - self.rightHand.x 
 			else
- 				self.laserCordinates.x = self.leftHand.x + self.scroll.x 
-				self.laserCordinates.y = self.leftHand.y + self.scroll.y	
+ 				self.laserCordinates.x = self.leftHand.x + self.scroll.x +5
+				self.laserCordinates.y = self.leftHand.y + self.scroll.y -1
 				self.laserCordinates.h = 2
 
 				local i = 0
@@ -393,7 +393,7 @@ class "Sam"
 						self.map:destroyTile(math.ceil((self.leftHand.x)/16)+i,math.ceil((self.leftHand.y+3)/16)) 
 					end					
 				end
-				self.laserCordinates.w =  (math.ceil((self.leftHand.x)/16)+i)*16 - self.leftHand.x
+				self.laserCordinates.w =  (math.ceil((self.leftHand.x)/16)+i)*16 - self.leftHand.x -5
 			end
 		elseif self.sfx.laser then
 			self.sfx.laser:stop()
