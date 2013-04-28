@@ -1,5 +1,6 @@
 require "lib/slither"
 require "classes.TileMap"
+local sfx = require "sfx"
 
 class "Sam"
 {	
@@ -8,6 +9,7 @@ class "Sam"
 		self.tex = tex
 		self.texWidth = tex:getWidth()
 		self.texHeight = tex:getHeight()
+		self.sfx = {}
 
 		self.abilities = {
 			rocketJump = true,
@@ -53,6 +55,7 @@ class "Sam"
 		if self.onGround then
 			self.velocity.y = - 100
 			self.jumping = true
+			sfx.play("jumpValve")
 		end
 	end,
 	
@@ -91,8 +94,14 @@ class "Sam"
 		end
 		
 		if not self.onGround and not self.jumping and love.keyboard.isDown(" ") and self.fuel > 0 and self.abilities.rocketJump then
+			if not self.sfx.jetpack then
+				self.sfx.jetpack = sfx.play("jetpack")
+			end
 			self.fuel = self.fuel - (80 * dt)
 			self.acceleration.y =self.acceleration.y - 200
+		elseif self.sfx.jetpack then
+			self.sfx.jetpack:stop()
+			self.sfx.jetpack = nil
 		end
 		
 		self.acceleration.x = - self.velocity.x
@@ -126,7 +135,6 @@ class "Sam"
 			self.jumping = false
 		end
 		
-		
 		if  self.onGround and not self.dashing and self.velocity.x == 0 then
 			self.fuel = self.fuel + (70 * dt)
 		end
@@ -141,15 +149,27 @@ class "Sam"
 		self.position.x = self.position.x + self.velocity.x * dt
 		self.position.y = self.position.y + self.velocity.y * dt
 
-			if love.keyboard.isDown("left", "a") then
-				self.position.x = self.position.x - (70 * dt)
-				self.facingRight = false
-			end
-		
-			if love.keyboard.isDown("right", "d") then
-				self.position.x = self.position.x + (70 * dt)
-				self.facingRight = true
-			end
+		local moving = false
+		if love.keyboard.isDown("left", "a") then
+			moving = true
+			self.position.x = self.position.x - (70 * dt)
+			self.facingRight = false
+		end
+	
+		if love.keyboard.isDown("right", "d") then
+			moving = true
+			self.position.x = self.position.x + (70 * dt)
+			self.facingRight = true
+		end
+
+		if moving and not self.sfx.motor then
+			self.sfx.motor = sfx.play("motor")
+			self.sfx.motor:setLooping(true)
+		end
+		if not moving and self.sfx.motor then
+			self.sfx.motor:stop()
+			self.sfx.motor = nil
+		end
 		
 		
 
@@ -168,6 +188,10 @@ class "Sam"
 		if self.map:isSolid(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16)+1) 
 			or	self.map:isSolid(math.ceil((self.rightFoot.x-3)/16)-1,math.floor(self.rightFoot.y/16)+1)	then
 			self.position.y = math.floor(self.position.y/16) * 16 
+
+			if not self.onGround then
+				sfx.play("land")
+			end
 			self.onGround = true
 			self:updateSensors()
 		else
