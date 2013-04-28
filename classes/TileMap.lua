@@ -109,6 +109,14 @@ class "TileMap" {
 		if not self.tiles[y][x] then return false end
 		return self.tiles[y][x] < 52 -- 0 and on
 	end,
+	
+	isDeathTile = function(self, x, y)
+		return false
+	end,
+	
+	isWiningTile = function(self, x, y)
+		return false
+	end,
 
 	getWidth = function(self)
 		return self.width

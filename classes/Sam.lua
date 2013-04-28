@@ -33,6 +33,7 @@ class "Sam"
 		self.leftHand = {x=0,y=0}
 		self.jumping = false
 		self.alive = true
+		self.levelComplete = false
 	end,
 	
 	draw = function(self)
@@ -168,7 +169,25 @@ class "Sam"
 			or self.map:isSolid(math.floor((self.rightHand.x)/16),math.ceil((self.rightHand.y+2)/16))	then
 			self.position.x = (math.floor((self.position.x )/16) * 16) 
 			self.velocity.x = 0
+			self:updateSensors()
 		end
+		
+		
+		
+		--inWinningTile
+		if self.map:isWiningTile(math.ceil((self.leftFoot.x)/16),math.floor(self.leftFoot.y/16)) 
+			or	self.map:isWiningTile(math.ceil((self.rightFoot.x)/16)-1,math.floor(self.rightFoot.y/16))	then
+			self.levelComplete = true
+		end
+		
+		--inDeathTile
+		if self.map:isDeathTile(math.ceil((self.leftFoot.x+2)/16),math.floor(self.leftFoot.y/16)) 
+			or	self.map:isDeathTile(math.ceil((self.rightFoot.x-2)/16)-1,math.floor(self.rightFoot.y/16))
+			or self.map:isDeathTile(math.ceil((self.leftHand.x+2)/16),math.ceil((self.leftHand.y)/16)+1) 
+			or self.map:isDeathTile(math.ceil((self.rightHand.x-2)/16)-1,math.ceil(self.rightHand.y/16)+1) then
+			self.alive = false
+		end
+		
 		
 		
 		if(self.position.y > 720) then
