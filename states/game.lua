@@ -1,12 +1,13 @@
 require "classes.TileMap"
 require "classes.Sam"
 local cache = require "lib.cache"
+local state = require "state"
 
 local game = {}
 
-function game:load()
+function game:load(level)
 	self.timer = 0
-	self.map = TileMap.fromFile("levels/lvl1.txt")
+	self.map = TileMap.fromFile(level)
 	samTex = cache.image("gfx/sam.png")
 	local spawn = self.map.level:getSpawn()
 	local pos = {x = (spawn.x-1)*16, y = (spawn.y-1)*16}
@@ -21,6 +22,15 @@ function game:update(dt)
 		sam:update(dt)
 	else
 		sam:spawn({x=300,y=200})
+	end
+	if sam.levelComplete then
+		local nextlevel = self.map.level:getNextLevel()
+		if nextlevel then
+			love.timer.sleep(0.100)
+			state.switch(self, nextlevel:getLevelFile())
+		else
+			state.switch(THE_END)
+		end
 	end
 end
 

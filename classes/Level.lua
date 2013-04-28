@@ -35,4 +35,8 @@ class "Level" {
 	getNextLevel = function(self)
 		error("Not implemented")
 	end,
+
+	getLevelFile = function(self)
+		error("Not implemented")
+	end,
 }

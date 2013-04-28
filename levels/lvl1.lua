@@ -1,6 +1,7 @@
 require "classes.Level"
 
-local lvl = class.private "Level1" (Level) {
+local lvl
+lvl = class.private "Level1" (Level) {
 	__init__ = function(self)
 		Level.__init__(self,
 			{x = 5, y = 16},
@@ -15,8 +16,12 @@ local lvl = class.private "Level1" (Level) {
 		return false
 	end,
 
-	getNextLevel = function(self)
-		return nil
+	getNextLevel = function(self, ...)
+		return lvl(...)
+	end,
+
+	getLevelFile = function(self)
+		return "levels/lvl1.txt"
 	end,
 }
 

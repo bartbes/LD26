@@ -1,9 +1,10 @@
 local state = {}
 
 function state.switch(target, ...)
-	if state.curstate then
+	if state.curstate and state.curstate.unload then
 		state.curstate:unload()
 	end
+	assert(target, "No state to switch to")
 	state.curstate = target
 	state.curstate:load(...)
 end
