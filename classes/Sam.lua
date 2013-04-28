@@ -64,6 +64,7 @@ class "Sam"
 
 		if self.flashlight then
 			local x = self.screenPosition.x - 30
+			local y = self.screenPosition.y + 18
 			local sx = 1
 			if self.facingRight then
 				x = self.screenPosition.x + 46
@@ -71,7 +72,7 @@ class "Sam"
 			end
 
 			love.graphics.setBlendMode("additive")
-			love.graphics.draw(self.lightTex, x, self.screenPosition.y, 0, sx, 1)
+			love.graphics.draw(self.lightTex, x, y, 0, sx, 1)
 			love.graphics.setBlendMode("alpha")
 		end
 	end,
