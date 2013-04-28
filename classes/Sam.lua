@@ -34,9 +34,9 @@ class "Sam"
 		self.thrustSystem:setLifetime( -1 )
 		self.thrustSystem:setParticleLife( 0.1, 0.2)
 		self.thrustSystem:setEmissionRate( 200 )
-		self.thrustSystem:setDirection( 1.6)
+		self.thrustSystem:setDirection( math.pi/2)
 		self.thrustSystem:setSpeed( 0, 200 )
-		self.thrustSystem:setSpin( 14, 26 )
+		self.thrustSystem:setSpin( 1, 2 )
 		--self.thrustSystem:setSpread( 30 )
 		self.thrustSystem:stop()
 	end,
@@ -66,11 +66,11 @@ class "Sam"
 	
 	draw = function(self)
 		if self.facingRight then
+			love.graphics.draw(self.thrustSystem,self.screenPosition.x+1, self.screenPosition.y+28)
 			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y)
-			love.graphics.draw(self.thrustSystem,self.screenPosition.x, self.screenPosition.y+24)
 		else
-			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y,0,-1,1,self.texWidth,0)
-			love.graphics.draw(self.thrustSystem,self.screenPosition.x + self.texWidth, self.screenPosition.y+24)
+			love.graphics.draw(self.thrustSystem,self.screenPosition.x + self.texWidth - 1, self.screenPosition.y+28,0,-1,1)
+			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y,0,-1,1,self.texWidth,0)		
 		end
 		
 		if self.firingLaser then
