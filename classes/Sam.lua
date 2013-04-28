@@ -40,6 +40,8 @@ class "Sam"
 		self.extiguishing = false
 		self.adjacentTile = {x=0,y=0}
 		self.flashlight = false
+		self.firingLaser = false
+		self.laserCordinates = {x=0,y=0,w=0,h=0}
 	end,
 	
 	draw = function(self)
@@ -47,6 +49,12 @@ class "Sam"
 			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y)
 		else
 			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y,0,-1,1,self.texWidth,0)
+		end
+		
+		if self.firingLaser then
+			love.graphics.setColor(191,55,59)
+			love.graphics.rectangle("fill", self.laserCordinates.x, self.laserCordinates.y, self.laserCordinates.w, self.laserCordinates.h )
+			love.graphics.setColor(0,0,0)
 		end
 	end,
 	
@@ -178,7 +186,7 @@ class "Sam"
 		
 		--ceiling
 		if self.map:isSolid(math.ceil((self.leftHand.x+3)/16),math.ceil((self.leftHand.y)/16)) 
-			or self.map:isSolid(math.ceil((self.rightHand.x-3)/16)-1,math.ceil(self.rightHand.y/16)) then
+			or self.map:isSolid(math.ceil((self.rightHand.x-3)/16),math.ceil(self.rightHand.y/16)) then
 			self.position.y = (math.ceil((self.position.y +7 )/16) * 16 ) -7
 			self.velocity.y = 0
 			self:updateSensors()
@@ -186,7 +194,7 @@ class "Sam"
 		
 		--floor
 		if self.map:isSolid(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16)+1) 
-			or	self.map:isSolid(math.ceil((self.rightFoot.x-3)/16)-1,math.floor(self.rightFoot.y/16)+1)	then
+			or	self.map:isSolid(math.ceil((self.rightFoot.x-3)/16),math.floor(self.rightFoot.y/16)+1)	then
 			self.position.y = math.floor(self.position.y/16) * 16 
 
 			if not self.onGround then
@@ -207,8 +215,8 @@ class "Sam"
 		end
 		
 		--right
-		if self.map:isSolid(math.floor((self.rightFoot.x)/16),math.ceil((self.rightFoot.y-3)/16))
-			or self.map:isSolid(math.floor((self.rightHand.x)/16),math.ceil((self.rightHand.y+3)/16))	then
+		if self.map:isSolid(math.ceil((self.rightFoot.x)/16),math.ceil((self.rightFoot.y-3)/16))
+			or self.map:isSolid(math.ceil((self.rightHand.x)/16),math.ceil((self.rightHand.y+3)/16))	then
 			self.position.x = (math.floor((self.position.x )/16) * 16) 
 			self.velocity.x = 0
 			self:updateSensors()
@@ -218,28 +226,29 @@ class "Sam"
 		
 		--inWinningTile
 		if self.map:isWinningTile(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16)) 
-			or	self.map:isWinningTile(math.ceil((self.rightFoot.x-3)/16)-1,math.floor(self.rightFoot.y/16))	then
+			or	self.map:isWinningTile(math.ceil((self.rightFoot.x-3)/16),math.floor(self.rightFoot.y/16))	then
 			self.levelComplete = true
 			self:updateSensors()
 		end
 		
 		--inDeadlyTile
 		if self.map:isDeadlyTile(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16)) 
-			or self.map:isDeadlyTile(math.ceil((self.rightFoot.x-3)/16)-1,math.floor(self.rightFoot.y/16))
+			or self.map:isDeadlyTile(math.ceil((self.rightFoot.x-3)/16),math.floor(self.rightFoot.y/16))
 			or self.map:isDeadlyTile(math.ceil((self.leftHand.x+3)/16),math.ceil((self.leftHand.y)/16)+1) 
-			or self.map:isDeadlyTile(math.ceil((self.rightHand.x-3)/16)-1,math.ceil(self.rightHand.y/16)+1) then
+			or self.map:isDeadlyTile(math.ceil((self.rightHand.x-3)/16),math.ceil(self.rightHand.y/16)+1) then
 			self.alive = false
 		end
 		
+		-- adjacent Tile
 		if self.facingRight then
-				self.adjacentTile.x = math.ceil((self.rightFoot.x-3)/16)
+				self.adjacentTile.x = math.ceil((self.rightFoot.x-3)/16)+1
 				self.adjacentTile.y = math.floor(self.rightFoot.y/16)
 			else
 				self.adjacentTile.x = math.ceil((self.leftFoot.x+3)/16)-1
 				self.adjacentTile.y = math.floor(self.rightFoot.y/16)
 		end
 		
-		
+		-- extinguisher
 		if love.keyboard.isDown("x") then
 			self.extiguishing = true
 		else
@@ -252,15 +261,34 @@ class "Sam"
 		
 		--TODO flashlight
 		
-		if(self.position.y > 720) then
-			self.alive = false
-		end
-		
+	
+		--scroll
 		self.scroll.x = math.min(0, -self.position.x + 300)
 		self.scroll.x = math.max(self.scroll.x, -self.map:getWidth()+640)
 		--self.scroll.x = 20
 		self.screenPosition.x = self.position.x + self.scroll.x
 		self.screenPosition.y = self.position.y + self.scroll.y	
+		
+				-- Laser
+		if love.keyboard.isDown("l") then
+			self.firingLaser = true
+		else
+			self.firingLaser = false
+		end
+		
+		if self.firingLaser then
+			if self.facingRight then
+				self.laserCordinates.x = self.rightHand.x + self.scroll.x 
+				self.laserCordinates.y = self.rightHand.y + self.scroll.y 
+				self.laserCordinates.w = 30
+				self.laserCordinates.h = 2				
+			else
+ 				self.laserCordinates.x = self.leftHand.x + self.scroll.x 
+				self.laserCordinates.y = self.leftHand.y + self.scroll.y	
+				self.laserCordinates.w = -30
+				self.laserCordinates.h = 2
+			end		
+		end
 		
 		
 	end,
@@ -268,9 +296,9 @@ class "Sam"
 	updateSensors = function(self)
 		self.leftFoot.x = self.position.x 
 		self.leftFoot.y = self.position.y + self.texHeight 
-		self.rightFoot.x = self.position.x + self.texHeight 
+		self.rightFoot.x = self.position.x + self.texWidth 
 		self.rightFoot.y = self.position.y + self.texHeight 
-		self.rightHand.x = self.position.x + self.texHeight 
+		self.rightHand.x = self.position.x + self.texWidth 
 		self.rightHand.y = self.position.y +7  --wtf
 		self.leftHand.x = self.position.x 
 		self.leftHand.y = self.position.y +7 
