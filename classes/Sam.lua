@@ -303,7 +303,7 @@ class "Sam"
 		
 	
 		--scroll
-		self.scroll.x = math.min(0, -self.position.x + 50)
+		self.scroll.x = math.min(0, -self.position.x + 140)
 		self.scroll.x = math.max(self.scroll.x, -self.map:getWidth()+426)
 
 		self.scroll.y = math.min(0, -self.position.y + 120)
