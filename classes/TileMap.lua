@@ -97,12 +97,13 @@ class "TileMap" {
 		return self.height
 	end,
 
-	fromFile = function(image, levelfile)
+	fromFile = function(levelfile)
 		local desc = {}
 		for line in love.filesystem.lines(levelfile) do
 			table.insert(desc, line)
 		end
 
+		local image = table.remove(desc, 1)
 		return TileMap(image, desc)
 	end,
 }
