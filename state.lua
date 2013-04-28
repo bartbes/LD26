@@ -19,7 +19,12 @@ end
 
 function state.update(dt)
 	if state.curstate.update then
-		return state.curstate:update(dt)
+		local cdt
+		while dt > 0 do
+			cdt = math.min(dt, 0.033)
+			state.curstate:update(cdt)
+			dt = dt - cdt
+		end
 	end
 end
 
