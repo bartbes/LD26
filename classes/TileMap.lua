@@ -125,6 +125,11 @@ class "TileMap" {
 		return self.level:isWinningTile(encodeTile(tile))
 	end,
 
+	isFireTile = function(self, x, y)
+		local tile = self.tiles[y][x]
+		return self.level:isFireTile(encodeTile(tile))
+	end,
+
 	getWidth = function(self)
 		return self.width
 	end,

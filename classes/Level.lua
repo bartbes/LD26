@@ -23,6 +23,10 @@ class "Level" {
 		return false
 	end,
 
+	isFireTile = function(self, tile)
+		return false
+	end,
+
 	transferAbilities = function(self, sam)
 		for i, v in pairs(sam.abilities) do
 			if self.abilities[i] ~= nil then
