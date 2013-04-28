@@ -59,7 +59,7 @@ class "Sam"
 		if self.firingLaser then
 			love.graphics.setColor(191,55,59)
 			love.graphics.rectangle("fill", self.laserCordinates.x, self.laserCordinates.y, self.laserCordinates.w, self.laserCordinates.h )
-			love.graphics.setColor(0,0,0)
+			love.graphics.setColor(255,255,255)
 		end
 
 		if self.flashlight then
