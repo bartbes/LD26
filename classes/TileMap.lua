@@ -153,13 +153,18 @@ class "TileMap" {
 		return true
 	end,
 	
-	
-	isDestroyable = function(self, x, y)
-		return false
+	isDestructableTile = function(self, x, y)
+		local tile = self.tiles[y][x]
+		return self.level:isDestructableTile(encodeTile(tile))
 	end,	
 	
-	DestroyTile = function(self, x, y)
-		return false
+	destroyTile = function(self, x, y)
+		if not self:isDestructableTile(x, y) then return false end
+		local tile = self.tiles[y][x]
+		local newtile = self.level:extinguishTile(encodeTile(tile), x, y)
+		self.tiles[y][x] = decodeTile(newtile)
+		self:buildBatch()
+		return true
 	end,
 
 	getWidth = function(self)

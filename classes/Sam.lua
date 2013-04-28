@@ -302,8 +302,8 @@ class "Sam"
 				local i = 0
 				while  not self.map:isSolid(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y+3)/16)) do 
 					i = i+1
-					if self.map:isDestroyable(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y+3)/16)) then
-						self.map:DestroyTile(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y+3)/16)) 
+					if self.map:isDestructableTile(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y+3)/16)) then
+						self.map:destroyTile(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y+3)/16)) 
 					end
 				end
 				self.laserCordinates.w =  (math.ceil((self.rightHand.x)/16)+i-1)*16 - self.rightHand.x
@@ -315,8 +315,8 @@ class "Sam"
 				local i = 0
 				while  not self.map:isSolid(math.ceil((self.leftHand.x)/16)+i,math.ceil((self.leftHand.y+3)/16)) do 
 					i = i-1	
-					if self.map:isDestroyable(math.ceil((self.leftHand.x)/16)+i,math.ceil((self.leftHand.y+3)/16)) then
-						self.map:DestroyTile(math.ceil((self.leftHand.x)/16)+i,math.ceil((self.leftHand.y+3)/16)) 
+					if self.map:isDestructableTile(math.ceil((self.leftHand.x)/16)+i,math.ceil((self.leftHand.y+3)/16)) then
+						self.map:destroyTile(math.ceil((self.leftHand.x)/16)+i,math.ceil((self.leftHand.y+3)/16)) 
 					end					
 				end
 				self.laserCordinates.w =  (math.ceil((self.leftHand.x)/16)+i)*16 - self.leftHand.x
