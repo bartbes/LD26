@@ -149,7 +149,7 @@ class "TileMap" {
 	
 	activateTerminal = function(self, x, y)
 		if not self:isTerminalTile(x, y) then return false end
-		self.level:activateTerminal(x, y)
+		self.minigame = self.level:activateTerminal(self, x, y)
 		return true
 	end,
 	

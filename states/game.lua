@@ -17,7 +17,6 @@ function game:load(level)
 	sam = Sam(pos, samTex, self.map, lightTex, thrustParticel)
 
 	bgm.start()
-
 	love.graphics.setBackgroundColor(200, 100, 120)
 end
 
@@ -42,16 +41,39 @@ function game:update(dt)
 			state.switch(THE_END)
 		end
 	end
+
+	if self.map.minigame then
+		self.minigame = self.map.minigame
+		self.map.minigame = nil
+	end
+
+	if self.minigame then
+		self.minigame:update(dt)
+		if not self.minigame.open then
+			self.minigame.callback(self.minigame.won)
+			self.minigame = nil
+		end
+	end
 end
 
 function game:draw()
+	love.graphics.push()
 	love.graphics.scale(3, 3)
 	self.map:draw(sam.scroll.x, sam.scroll.y)
 	sam:draw()
 	drawFuelGuage()
+
+	love.graphics.pop()
+	if self.minigame then
+		self.minigame:draw()
+	end
 end
 
 function game:keypressed(key, unicode)
+	if self.minigame then
+		return self.minigame:keypressed(key, unicode)
+	end
+
 	if key == " " then
 		sam:jump()
 	elseif key == "b" then
