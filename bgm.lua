@@ -47,6 +47,7 @@ end
 function bgm.nextsong()
 	local songname = bgm.bag()
 	bgm.cursong = love.audio.newSource("bgm/" .. songname .. ".ogg")
+	bgm.cursong:setVolume(0.7)
 	bgm.cursong:play()
 end
 
