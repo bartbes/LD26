@@ -18,6 +18,8 @@ class "Sam"
 		self.map = map
 		self.leftFoot = {x=0,y=0}
 		self.rightFoot = {x=0,y=0}
+		self.rightHand = {x=0,y=0}
+		self.leftHand = {x=0,y=0}
 	end,
 	
 	draw = function(self)
@@ -114,39 +116,59 @@ class "Sam"
 				self.facingRight = true
 			end
 			
-		--updateFeet
-		self.leftFoot.x = self.position.x
-		self.leftFoot.y = self.position.y + self.texHeight
-		self.rightFoot.x = self.position.x + self.texHeight
-		self.rightFoot.y = self.position.y + self.texHeight
+		self:updateSensors()
 		
-		if self.map:isSolid(math.floor(self.leftFoot.x/16)+1,math.floor(self.leftFoot.y/16)+1) then
-			self.position.y = self.leftFoot.y - self.texHeight
+		--ceiling
+		if self.map:isSolid(math.ceil((self.leftHand.x+2)/16),math.ceil((self.leftHand.y)/16)) 
+			or self.map:isSolid(math.ceil((self.rightHand.x-2)/16)-1,math.ceil(self.rightHand.y/16)) then
+			self.position.y = (math.ceil((self.position.y +7 )/16) * 16 ) -7
+			self.velocity.y = 0
+			self:updateSensors()
+		end
+		
+		--floor
+		if self.map:isSolid(math.ceil((self.leftFoot.x+2)/16),math.floor(self.leftFoot.y/16)+1) 
+			or	self.map:isSolid(math.ceil((self.rightFoot.x-2)/16)-1,math.floor(self.rightFoot.y/16)+1)	then
+			self.position.y = math.floor(self.position.y/16) * 16 
 			self.onGround = true
+			self:updateSensors()
 		else
 			self.onGround = false
 		end
 		
-		if self.map:isSolid(math.floor(self.rightFoot.x/16)+1,math.floor(self.rightFoot.y/16)+1) then
-			self.position.y = self.rightFoot.y - self.texHeight
-			self.onGround = true
-		else
-			self.onGround = false
+		--left
+		if self.map:isSolid(math.ceil(self.leftFoot.x/16),math.ceil((self.leftFoot.y-2)/16))
+			or self.map:isSolid(math.ceil(self.leftHand.x/16),math.ceil((self.leftHand.y+2)/16))	then
+			self.position.x =  math.ceil(self.position.x/16) * 16 
+			self.velocity.x = 0
+			self:updateSensors()
 		end
-			
+		
+		--right
+		if self.map:isSolid(math.floor((self.rightFoot.x)/16),math.ceil((self.rightFoot.y-2)/16))
+			or self.map:isSolid(math.floor((self.rightHand.x)/16),math.ceil((self.rightHand.y+2)/16))	then
+			self.position.x = (math.floor((self.position.x )/16) * 16) 
+			self.velocity.x = 0
+		end
+		
 
-		-- hit ground
-		--if self.position.y >= 300 and self.velocity.y >= 0 then
-			--self.onGround = true
-			--self.position.y = 300
-		--else
-			--self.onGround = false
-		--end
-		
-		self.screenPosition.x = self.position.x - self.scroll.x
-		self.screenPosition.y = self.position.y - self.scroll.y	
+		self.scroll.x = -self.position.x + 300
+		--self.scroll.x = 20
+		self.screenPosition.x = self.position.x + self.scroll.x
+		self.screenPosition.y = self.position.y + self.scroll.y	
 		
 		
 	end,
+	
+	updateSensors = function(self)
+		self.leftFoot.x = self.position.x 
+		self.leftFoot.y = self.position.y + self.texHeight 
+		self.rightFoot.x = self.position.x + self.texHeight 
+		self.rightFoot.y = self.position.y + self.texHeight 
+		self.rightHand.x = self.position.x + self.texHeight 
+		self.rightHand.y = self.position.y +7  --wtf
+		self.leftHand.x = self.position.x 
+		self.leftHand.y = self.position.y +7 
+	end
 
 }
