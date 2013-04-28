@@ -32,7 +32,9 @@ lvl = class.private "Level1" (Level) {
 	activateTerminal = function(self, map, x, y)
 		local minigame = Hacking()
 		function minigame.callback(success)
-			print("Hacked: " .. tostring(success))
+			if success then
+				map:modifyTile(x, y, "9")
+			end
 		end
 		return minigame
 	end,
