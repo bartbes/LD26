@@ -22,6 +22,7 @@ Hacking = class.private "Hacking" (Minigame) {
 
 		self.font = cache.font("fonts/PrStart.ttf:16")
 		self.overlay = cache.image("gfx/hackOverlay.png")
+		self.scanlines = cache.image("gfx/scanLines.png")
 
 		love.graphics.setFont(self.font)
 	end,
@@ -86,6 +87,14 @@ Hacking = class.private "Hacking" (Minigame) {
 		else
 			love.graphics.print(">INTRUSION DETECTED, SHUTTING DOWN", 260, 160)
 		end
+
+		love.graphics.setScissor(240, 60, 800, 600)
+		love.graphics.setBlendMode("multiplicative")
+		love.graphics.setColor(255, 255, 255, 120)
+		love.graphics.draw(self.scanlines, 240, 60)
+		love.graphics.setScissor()
+
+		love.graphics.setBlendMode("alpha")
 		love.graphics.setColor(255, 255, 255)
 		love.graphics.draw(self.overlay, 240, 60)
 	end,
