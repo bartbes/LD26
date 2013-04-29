@@ -2,6 +2,16 @@ require "classes.Minigame"
 local cache = require "lib.cache"
 
 local keys = {"0", "1"}
+local passwordList = {
+	"NARPAS SWORD",
+	"JUSTIN BAILEY",
+	"IDDQD",
+	"IDKFA",
+	"BIG DADDY",
+	"XYZZY",
+	"COMEFLYWITHME",
+	"BETTERTHANWALKING",
+}
 
 local Hacking
 Hacking = class.private "Hacking" (Minigame) {
@@ -16,6 +26,7 @@ Hacking = class.private "Hacking" (Minigame) {
 
 		self.address = math.random(0x10000000, 0x7FFFFFFF)
 		self.address = ("0x%08x"):format(self.address)
+		self.fakePassword = passwordList[math.random(#passwordList)]
 
 		self.pos = 1
 		self.timer = 0
@@ -70,7 +81,7 @@ Hacking = class.private "Hacking" (Minigame) {
 				if self.timer < 0.6 then break end
 				love.graphics.print(">.", 260, 200)
 				if self.timer < 0.9 then break end
-				love.graphics.print(">FOUND 'NARPAS SWORD'", 260, 220)
+				love.graphics.print(">FOUND '" .. self.fakePassword .. "'", 260, 220)
 				if self.timer < 1.1 then break end
 				love.graphics.print(">.", 260, 240)
 				if self.timer < 1.2 then break end
