@@ -48,11 +48,11 @@ lvl = class.private "Level1" (Level) {
 
 	getFirePositions = function(self)
 		return {
-			{66, 57},
+			{65, 57},
 			{26, 37},
 			{70, 37},
 			{118, 48},
-			{95, 57},
+			{94, 57},
 		}
 	end,
 
