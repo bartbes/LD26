@@ -30,10 +30,7 @@ lvl = class.private "Level1" (Level) {
 	end,
 
 	isDeadlyTile = function(self, tile)
-		if tile == "5" then
-			return true
-		end
-		return false
+		return tile:match("[178]")
 	end,
 
 	getNextLevel = function(self)
@@ -65,7 +62,7 @@ lvl = class.private "Level1" (Level) {
 	end,
 
 	isSolid = function(self, tile)
-		return not tile:match("[EJKLMfenrstz02378+-]")
+		return not tile:match("[EJKLMfenrstz012378+-]")
 	end,
 
 	isDestructableTile = function(self, tile)
