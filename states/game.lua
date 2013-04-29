@@ -136,8 +136,15 @@ end
 
 function game:drawScoreAndTime()
 	love.graphics.setFont(self.font)
+
+	-- drop shadow
+	love.graphics.setColor(100, 100, 100, 100)
+	love.graphics.print(("Time:  %.2f"):format(self.timer), 22, 22)
+	love.graphics.print(("Score: %d"):format(self.score), 22, 40)
+
+	love.graphics.setColor(255, 255, 255)
 	love.graphics.print(("Time:  %.2f"):format(self.timer), 20, 20)
-	love.graphics.print(("Score: %d"):format(self.score), 20, 34)
+	love.graphics.print(("Score: %d"):format(self.score), 20, 38)
 end
 
 return game
