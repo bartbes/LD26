@@ -1,7 +1,7 @@
 local state = require "state"
 local cache = require "lib.cache"
 local game = require "states.game"
---local credits = require "states.credits"
+local credits = require "states.credits"
 
 local menu = {}
 
