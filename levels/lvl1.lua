@@ -111,6 +111,7 @@ lvl = class.private "Level1" (Level) {
 					map:modifyTile(98, 49, "t")
 					map:modifyTile(127, 33, "+")
 					map:modifyTile(127, 32, "2")
+					map:modifyTile(127, 31, "2")
 					map.state.score = map.state.score + 10
 					self.teleporterActive = true
 					map.minigame = Dialog("Security hatch: UNLOCKED\nTeleporter: ACTIVATED")
