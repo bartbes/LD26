@@ -111,6 +111,18 @@ class "TileMap" {
 		local tile = self.tiles[y][x]
 		return self.level:isSolid(encodeTile(tile), tile)
 	end,
+
+	isSolidFromBelow = function(self, x, y)
+		if not self.tiles[y] then return false end
+		if not self.tiles[y][x] then return false end
+		local tile = self.tiles[y][x]
+		local solid = self.level:isSolidFromBelow(encodeTile(tile), tile)
+		if solid == nil then
+			solid = self.level:isSolid(encodeTile(tile), tile)
+		end
+
+		return solid
+	end,
 	
 	isDeadlyTile = function(self, x, y)
 		local tile = self.tiles[y][x]

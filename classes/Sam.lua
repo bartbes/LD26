@@ -250,8 +250,8 @@ class "Sam"
 		self:updateSensors()
 		
 		--ceiling
-		if self.map:isSolid(math.ceil((self.leftHand.x+3)/16),math.ceil((self.leftHand.y)/16)) 
-			or self.map:isSolid(math.ceil((self.rightHand.x-3)/16),math.ceil(self.rightHand.y/16)) then
+		if self.map:isSolidFromBelow(math.ceil((self.leftHand.x+3)/16),math.ceil((self.leftHand.y)/16)) 
+			or self.map:isSolidFromBelow(math.ceil((self.rightHand.x-3)/16),math.ceil(self.rightHand.y/16)) then
 			self.position.y = (math.ceil((self.position.y +7 )/16) * 16 ) -7
 			self.velocity.y = 0
 			self:updateSensors()

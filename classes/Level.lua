@@ -19,6 +19,10 @@ class "Level" {
 		return tilenum < 52
 	end,
 
+	isSolidFromBelow = function(self, tile, tilenum)
+		-- returning nothing/nil means same as isSolid
+	end,
+
 	isDeadlyTile = function(self, tile)
 		return false
 	end,
