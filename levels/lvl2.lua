@@ -1,10 +1,9 @@
 require "classes.Level"
 local Hacking = require "minigames.Hacking"
 local Dialog = require "minigames.Dialog"
-local lvl2 = require "levels.lvl2"
 
 local lvl
-lvl = class.private "Level1" (Level) {
+lvl = class.private "Level2" (Level) {
 	__init__ = function(self)
 		Level.__init__(self,
 			{x = 6, y = 36},
@@ -40,11 +39,11 @@ lvl = class.private "Level1" (Level) {
 	end,
 
 	getNextLevel = function(self)
-		return lvl2
+		return nil
 	end,
 
 	getLevelFile = function(self)
-		return "levels/lvl1.txt"
+		return "levels/lvl2.txt"
 	end,
 
 	getFirePositions = function(self)
