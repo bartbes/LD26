@@ -225,6 +225,8 @@ class "Sam"
 		elseif self.fuel < 0 then
 			self.fuel = 0
 		end
+		-- TODO: TAKE THIS OUT YOU BASTARD
+		self.fuel = 100
 
 	--POSITION
 		self.position.x = self.position.x + self.velocity.x * dt
