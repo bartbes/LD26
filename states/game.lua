@@ -75,12 +75,11 @@ function game:update(dt)
 			self.minigame.callback(self.minigame.won)
 			self.minigame = nil
 		end
-		return
 	end
 
 	self.timer = self.timer + dt
 	if sam.alive then
-		sam:update(dt)
+		sam:update(dt, self.minigame)
 	else
 		sam:spawn()
 		sam:update(0)

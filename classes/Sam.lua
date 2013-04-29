@@ -174,11 +174,13 @@ class "Sam"
 
 
 
-	update = function(self,dt)
+	update = function(self, dt, justSystems)
 
 		self.tex:update(dt)
 		self.thrustSystem:update(dt)
 		self.spraySystem:update(dt)
+
+		if justSystems then return end
 
 	--ACCELERATION
 
