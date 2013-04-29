@@ -87,7 +87,7 @@ class "TileMap" {
 		end
 
 		self.batteries = {}
-		self.batteryImage = cache.image("gfx/SamTest.png")
+		self.batteryImage = cache.image("gfx/battery.png")
 
 		self:buildBatch()
 	end,
