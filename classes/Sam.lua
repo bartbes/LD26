@@ -423,19 +423,7 @@ class "Sam"
 
 		
 		if self.extinguishing and self.map:isFireTile(self.adjacentTile.x,self.adjacentTile.y) then
-			local id = self.adjacentTile.x .. "," .. self.adjacentTile.y
-			if self.fireId == id then
-				self.fireTimer = self.fireTimer + dt
-				if self.fireTimer > 2 then
-					self.map:extinguishTile(self.adjacentTile.x,self.adjacentTile.y)
-					self.fireId = nil
-				end
-			else
-				self.fireId = id
-				self.fireTimer = 0
-			end
-		else
-			self.fireId = nil
+			self.map:extinguishTile(self.adjacentTile.x,self.adjacentTile.y, dt)
 		end
 		
 		
