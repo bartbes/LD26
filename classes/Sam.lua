@@ -433,20 +433,20 @@ class "Sam"
 				self.sfx.laser = sfx.play("laserHigh", true)
 			end
 			if self.facingRight then
-				self.laserCordinates.x = self.rightHand.x + self.scroll.x -5
-				self.laserCordinates.y = self.rightHand.y + self.scroll.y - 1
+				self.laserCordinates.x = self.rightFoot.x + self.scroll.x -5
+				self.laserCordinates.y = self.rightFoot.y + self.scroll.y - 9
 				self.laserCordinates.h = 2
 
 				local i = 0
-				while  not self.map:isSolid(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y+3)/16)) do
+				while  not self.map:isSolid(math.ceil((self.rightFoot.x)/16)+i,math.ceil((self.rightFoot.y-9)/16)) do
 					i = i+1
 				end
-				if self.map:isDestructableTile(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y)/16)) then
-					local id = math.ceil((self.rightHand.x)/16)+i .. "," .. math.ceil((self.rightHand.y)/16)
+				if self.map:isDestructableTile(math.ceil((self.rightFoot.x)/16)+i,math.ceil((self.rightFoot.y-9)/16)) then
+					local id = math.ceil((self.rightFoot.x)/16)+i .. "," .. math.ceil((self.rightFoot.y-9)/16)
 					if self.laserId == id then
 						self.laserTimer = self.laserTimer + dt
 						if self.laserTimer > 3 then
-							self.map:destroyTile(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y)/16))
+							self.map:destroyTile(math.ceil((self.rightFoot.x)/16)+i,math.ceil((self.rightFoot.y-9)/16))
 							self.laserId = nil
 						end
 					else
@@ -456,22 +456,22 @@ class "Sam"
 				else
 					self.laserId = nil
 				end
-				self.laserCordinates.w =  (math.ceil((self.rightHand.x)/16)+i-1)*16 + 5 - self.rightHand.x
+				self.laserCordinates.w =  (math.ceil((self.rightFoot.x)/16)+i-1)*16 + 5 - self.rightFoot.x
 			else
- 				self.laserCordinates.x = self.leftHand.x + self.scroll.x +5
-				self.laserCordinates.y = self.leftHand.y + self.scroll.y -1
+ 				self.laserCordinates.x = self.leftFoot.x + self.scroll.x +5
+				self.laserCordinates.y = self.leftFoot.y + self.scroll.y -9
 				self.laserCordinates.h = 2
 
 				local i = 0
-				while  not self.map:isSolid(math.ceil((self.leftHand.x)/16)+i,math.ceil((self.leftHand.y+3)/16)) do
+				while  not self.map:isSolid(math.ceil((self.leftFoot.x)/16)+i,math.ceil((self.leftFoot.y-9)/16)) do
 					i = i-1
 				end
-				if self.map:isDestructableTile(math.ceil((self.leftHand.x)/16)+i,math.ceil((self.leftHand.y+3)/16)) then
-					local id = math.ceil((self.leftHand.x)/16)+i .. "," .. math.ceil((self.leftHand.y+3)/16)
+				if self.map:isDestructableTile(math.ceil((self.leftFoot.x)/16)+i,math.ceil((self.leftFoot.y-9)/16)) then
+					local id = math.ceil((self.leftFoot.x)/16)+i .. "," .. math.ceil((self.leftFoot.y-9)/16)
 					if self.laserId == id then
 						self.laserTimer = self.laserTimer + dt
 						if self.laserTimer > 3 then
-							self.map:destroyTile(math.ceil((self.leftHand.x)/16)+i,math.ceil((self.leftHand.y+3)/16))
+							self.map:destroyTile(math.ceil((self.leftFoot.x)/16)+i,math.ceil((self.leftFoot.y-9)/16))
 							self.laserId = nil
 						end
 					else
@@ -481,7 +481,7 @@ class "Sam"
 				else
 					self.laserId = nil
 				end
-				self.laserCordinates.w =  (math.ceil((self.leftHand.x)/16)+i)*16 - self.leftHand.x -5
+				self.laserCordinates.w =  (math.ceil((self.leftFoot.x)/16)+i)*16 - self.leftFoot.x -5
 			end
 		else
 			if self.sfx.laser then
