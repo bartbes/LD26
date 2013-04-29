@@ -85,6 +85,12 @@ class "TileMap" {
 		for i, v in ipairs(fireLocations) do
 			self:createFire(v[1], v[2])
 		end
+		
+		self.sparks = {}
+		local sparkLocations = self.level:getSparkPositions()
+		for i, v in ipairs(sparkLocations) do
+			self:createSpark(v[1], v[2])
+		end
 
 		self.batteries = {}
 		self.batteryImage = cache.image("gfx/battery.png")
@@ -103,6 +109,19 @@ class "TileMap" {
 		fire:setSpread(0.5)
 
 		table.insert(self.fires, {system = fire, x = x, y = y})
+	end,
+	
+	createSpark = function(self, x, y)
+		local spark = love.graphics.newParticleSystem(cache.image("gfx/particle1.png"), 250)
+		spark:setEmissionRate(2)
+		spark:setLifetime(-1)
+		spark:setParticleLife(0.25, 0.5)
+		spark:setDirection(0)
+		spark:setSpeed(0, 40)
+		spark:setSpin(1, 2)
+		spark:setSpread(math.pi*2)
+
+		table.insert(self.sparks, {system = fire, x = x, y = y})
 	end,
 
 	createBattery = function(self, x, y)
