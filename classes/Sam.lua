@@ -267,8 +267,10 @@ class "Sam"
 		end
 
 		--floor
-		if self.map:isSolid(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16)+1)
-			or	self.map:isSolid(math.ceil((self.rightFoot.x-3)/16),math.floor(self.rightFoot.y/16)+1)	then
+		if (self.map:isSolid(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16)+1)
+			or	self.map:isSolid(math.ceil((self.rightFoot.x-3)/16),math.floor(self.rightFoot.y/16)+1))
+			and (self.velocity.y > 0 or self.onGround)
+			and self.position.y - (math.floor(self.position.y/16) * 16) < 5 then
 			self.position.y = math.floor(self.position.y/16) * 16
 
 			if not self.onGround then
@@ -281,16 +283,16 @@ class "Sam"
 		end
 
 		--left
-		if self.map:isSolid(math.ceil(self.leftFoot.x/16),math.ceil((self.leftFoot.y-3)/16))
-			or self.map:isSolid(math.ceil(self.leftHand.x/16),math.ceil((self.leftHand.y+3)/16))	then
+		if self.map:isSolidFromBelow(math.ceil(self.leftFoot.x/16),math.ceil((self.leftFoot.y-3)/16))
+			or self.map:isSolidFromBelow(math.ceil(self.leftHand.x/16),math.ceil((self.leftHand.y+3)/16))	then
 			self.position.x =  math.ceil(self.position.x/16) * 16
 			self.velocity.x = 0
 			self:updateSensors()
 		end
 
 		--right
-		if self.map:isSolid(math.ceil((self.rightFoot.x)/16),math.ceil((self.rightFoot.y-3)/16))
-			or self.map:isSolid(math.ceil((self.rightHand.x)/16),math.ceil((self.rightHand.y+3)/16))	then
+		if self.map:isSolidFromBelow(math.ceil((self.rightFoot.x)/16),math.ceil((self.rightFoot.y-3)/16))
+			or self.map:isSolidFromBelow(math.ceil((self.rightHand.x)/16),math.ceil((self.rightHand.y+3)/16))	then
 			self.position.x = (math.floor((self.position.x )/16) * 16)
 			self.velocity.x = 0
 			self:updateSensors()
