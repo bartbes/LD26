@@ -45,7 +45,13 @@ lvl = class.private "Level1" (Level) {
 	end,
 
 	getFirePositions = function(self)
-		return {{26, 19}}
+		return {
+			{65, 57},
+			{25, 37},
+			{69, 37},
+			{117, 48},
+			{94, 57},
+		}
 	end,
 
 	isTerminalTile = function(self, tile)
