@@ -4,6 +4,7 @@ local cache = require "lib.cache"
 local state = require "state"
 local bgm = require "bgm"
 local Dialog = require "minigames.Dialog"
+local Pausemenu = require "minigames.Pausemenu"
 
 local game = {}
 
@@ -53,13 +54,6 @@ function game:update(dt)
 		end
 	end
 
-	self.timer = self.timer + dt
-	if sam.alive then
-		sam:update(dt)
-	else
-		sam:spawn()
-	end
-
 	if self.map.minigame then
 		self.minigame = self.map.minigame
 		self.map.minigame = nil
@@ -75,6 +69,14 @@ function game:update(dt)
 			self.minigame.callback(self.minigame.won)
 			self.minigame = nil
 		end
+		return
+	end
+
+	self.timer = self.timer + dt
+	if sam.alive then
+		sam:update(dt)
+	else
+		sam:spawn()
 	end
 end
 
@@ -107,7 +109,7 @@ function game:keypressed(key, unicode)
 	elseif key == "f" then
 		sam:toggleLight()
 	elseif key == "escape" then
-		love.event.push("quit")
+		self.minigame = Pausemenu(self, sam)
 	end
 end
 
