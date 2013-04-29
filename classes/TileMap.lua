@@ -173,7 +173,7 @@ class "TileMap" {
 
 	isDeadlyTile = function(self, x, y)
 		local tile = self.tiles[y][x]
-		return self.level:isDeadlyTile(encodeTile(tile))
+		return self:isFireTile(x, y) or self.level:isDeadlyTile(encodeTile(tile))
 	end,
 
 	isWinningTile = function(self, x, y)
