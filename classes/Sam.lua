@@ -26,7 +26,6 @@ class "Sam"
 		self:spawn()
 		self:createThrustParticles()
 		self:createSprayParticles()
-		
 	end,
 	
 	createThrustParticles = function(self)
