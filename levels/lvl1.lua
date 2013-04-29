@@ -6,7 +6,7 @@ local lvl
 lvl = class.private "Level1" (Level) {
 	__init__ = function(self)
 		Level.__init__(self,
-			{x = 6, y = 16},
+			{x = 6, y = 34},
 			{x = 4, y = 6},
 			{})
 	end,
@@ -41,7 +41,7 @@ lvl = class.private "Level1" (Level) {
 	end,
 
 	isSolid = function(self, tile)
-		return not tile:match("[JKLMfelnrstz02378+-]")
+		return not tile:match("[EJKLMfelnrstz02378+-]")
 	end,
 
 	activateTerminal = function(self, map, x, y)
