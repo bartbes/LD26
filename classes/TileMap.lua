@@ -100,7 +100,7 @@ class "TileMap" {
 
 	createFire = function(self, x, y)
 		local fire = love.graphics.newParticleSystem(cache.image("gfx/particle1.png"), 250)
-		fire:setEmissionRate(200)
+		fire:setEmissionRate(198)
 		fire:setLifetime(-1)
 		fire:setParticleLife(0.05, 0.15)
 		fire:setDirection(-math.pi/2)
@@ -108,7 +108,7 @@ class "TileMap" {
 		fire:setSpin(1, 2)
 		fire:setSpread(0.5)
 
-		table.insert(self.fires, {system = fire, x = x, y = y})
+		table.insert(self.fires, {system = fire, x = x, y = y, health = 3})
 	end,
 	
 	createSpark = function(self, x, y)
@@ -221,10 +221,15 @@ class "TileMap" {
 		return false
 	end,
 
-	extinguishTile = function(self, x, y)
+	extinguishTile = function(self, x, y, amount)
 		for i, v in ipairs(self.fires) do
 			if v.x == x and v.y == y then
-				table.remove(self.fires, i)
+				v.health = v.health - amount
+				v.system:setParticleLife(0.05, 0.05*v.health)
+				v.system:setSizes(v.health/3)
+				if v.health <= 0 then
+					table.remove(self.fires, i)
+				end
 				return true
 			end
 		end
