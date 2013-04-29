@@ -75,6 +75,8 @@ lvl = class.private "Level1" (Level) {
 			function minigame.callback(success)
 				if success then
 					map:modifyTile(58, 38, "t")
+					map.state.score = map.state.score + 10
+					map.minigame = Dialog("Security hatch: UNLOCKED")
 				end
 			end
 		end
