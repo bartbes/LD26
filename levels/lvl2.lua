@@ -6,7 +6,7 @@ local lvl
 lvl = class.private "Level2" (Level) {
 	__init__ = function(self)
 		Level.__init__(self,
-			{x = 9, y = 6},
+			{x = 9, y = 5},
 			{x = 127, y = 33},
 			{laser = false})
 
