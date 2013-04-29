@@ -25,6 +25,10 @@ class "Level" {
 	getFirePositions = function(self)
 		return {}
 	end,
+	
+	getSparkPositions = function(self)
+		return {}
+	end,
 
 	isSolid = function(self, tile, tilenum)
 		return tilenum < 52

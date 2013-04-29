@@ -112,16 +112,16 @@ class "TileMap" {
 	end,
 	
 	createSpark = function(self, x, y)
-		local spark = love.graphics.newParticleSystem(cache.image("gfx/particle1.png"), 250)
-		spark:setEmissionRate(2)
+		local spark = love.graphics.newParticleSystem(cache.image("gfx/spark.png"), 250)
+		spark:setEmissionRate(4)
 		spark:setLifetime(-1)
 		spark:setParticleLife(0.25, 0.5)
 		spark:setDirection(0)
-		spark:setSpeed(0, 40)
+		spark:setSpeed(20, 40)
 		spark:setSpin(1, 2)
 		spark:setSpread(math.pi*2)
 
-		table.insert(self.sparks, {system = fire, x = x, y = y})
+		table.insert(self.sparks, {system = spark, x = x, y = y})
 	end,
 
 	createBattery = function(self, x, y)
@@ -150,11 +150,18 @@ class "TileMap" {
 		for i, v in ipairs(self.fires) do
 			v.system:update(dt)
 		end
+		
+		for i, v in ipairs(self.sparks) do
+			v.system:update(dt)
+		end
 	end,
 
 	draw = function(self, x, y, ...)
 		love.graphics.draw(self.batch, math.floor(x), math.floor(y), ...)
 		for i, v in ipairs(self.fires) do
+			love.graphics.draw(v.system, (v.x-0.5)*tilesize+x, v.y*tilesize+y)
+		end
+		for i, v in ipairs(self.sparks) do
 			love.graphics.draw(v.system, (v.x-0.5)*tilesize+x, v.y*tilesize+y)
 		end
 		for i, v in ipairs(self.batteries) do

@@ -56,6 +56,16 @@ lvl = class.private "Level1" (Level) {
 			{94, 57},
 		}
 	end,
+	
+	getSparkPositions = function(self)
+		return {
+			{67, 57},
+			{29, 37},
+			{72, 37},
+			{120, 48},
+			{96, 57},
+		}
+	end,
 
 	isTerminalTile = function(self, tile)
 		return tile == "z" or tile == "0"
