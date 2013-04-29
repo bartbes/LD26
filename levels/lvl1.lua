@@ -45,7 +45,13 @@ lvl = class.private "Level1" (Level) {
 	end,
 
 	getFirePositions = function(self)
-		return {{26, 19}}
+		return {
+			{65, 57},
+			{25, 37},
+			{69, 37},
+			{117, 48},
+			{94, 57},
+		}
 	end,
 
 	isTerminalTile = function(self, tile)
@@ -95,6 +101,14 @@ lvl = class.private "Level1" (Level) {
 					map:modifyTile(58, 38, "t")
 					map.state.score = map.state.score + 10
 					map.minigame = Dialog("Security hatch: UNLOCKED")
+				end
+			end
+		elseif y == 48 and x >= 103 and x <= 104 then
+			function minigame.callback(success)
+				if success then
+					map:modifyTile(98, 49, "t")
+					map.state.score = map.state.score + 10
+					map.minigame = Dialog("Security hatch: UNLOCKED\nTeleporter: ACTIVATED")
 				end
 			end
 		end
