@@ -404,6 +404,8 @@ class "Sam"
 						self.laserId = id
 						self.laserTimer = 0
 					end
+				else
+					self.laserId = nil
 				end
 				self.laserCordinates.w =  (math.ceil((self.rightHand.x)/16)+i-1)*16 + 5 - self.rightHand.x
 			else
@@ -427,6 +429,8 @@ class "Sam"
 						self.laserId = id
 						self.laserTimer = 0
 					end
+				else
+					self.laserId = nil
 				end
 				self.laserCordinates.w =  (math.ceil((self.leftHand.x)/16)+i)*16 - self.leftHand.x -5
 			end
