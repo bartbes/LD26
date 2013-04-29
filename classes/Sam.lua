@@ -83,7 +83,6 @@ class "Sam"
 	draw = function(self)
 
 		if self.firingLaser then
-			love.graphics.setColor(191,55,59)
 			local q = love.graphics.newQuad(0, 0, self.laserCordinates.w, 5, 5, 5)
 			love.graphics.drawq(self.laser, q, self.laserCordinates.x, self.laserCordinates.y)
 
