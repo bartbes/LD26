@@ -35,7 +35,7 @@ Pausemenu = class.private "Pausemenu" (Minigame) {
 
 		love.graphics.setColor(106, 217, 245)
 		love.graphics.printf("> PAUSED <", 340, 250, 580, "center")
-		love.graphics.printf("Press Esc to quit, and anything else to continue", 340, 270, 580, "center")
+		love.graphics.printf("Press Esc to quit, or anything else to continue", 340, 270, 580, "center")
 
 		love.graphics.print("Score:        " .. self.score, 340, 330)
 		love.graphics.print(("Time:    %.2f"):format(self.time), 690, 330)
