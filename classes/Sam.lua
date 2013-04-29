@@ -1,6 +1,7 @@
 require "lib/slither"
 require "classes.TileMap"
 local sfx = require "sfx"
+local cache = require "lib.cache"
 
 class "Sam"
 {
@@ -12,6 +13,7 @@ class "Sam"
 		self.texHeight = tex:getHeight()
 		self.lightWidth = lightTex:getWidth()
 		self.sfx = {}
+		self.laser = cache.image("gfx/laserSmall.png")
 
 		self.abilities = {
 			rocketJump = true,
@@ -82,7 +84,8 @@ class "Sam"
 
 		if self.firingLaser then
 			love.graphics.setColor(191,55,59)
-			love.graphics.rectangle("fill", self.laserCordinates.x, self.laserCordinates.y, self.laserCordinates.w, self.laserCordinates.h )
+			local q = love.graphics.newQuad(0, 0, self.laserCordinates.w, 5, 5, 5)
+			love.graphics.drawq(self.laser, q, self.laserCordinates.x, self.laserCordinates.y)
 
 			if self.laserId then
 				local x, y = self.laserId:match("(%d+),(%d+)")
