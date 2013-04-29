@@ -26,6 +26,8 @@ Dale James
 Level Designer
 Dale James
 
+Entropy Manager
+Mao Xing
 
 
 
