@@ -79,6 +79,14 @@ class "Sam"
 		self.flashlight = false
 		self.firingLaser = false
 		self.laserCordinates = {x=0,y=0,w=0,h=0}
+		
+		for i, v in pairs(self.sfx) do
+			if type(v) == "userdata" then
+				v:stop()
+			end
+		end
+		self.sfx = {}
+		
 	end,
 
 	draw = function(self)
