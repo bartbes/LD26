@@ -31,7 +31,7 @@ lvl = class.private "Level1" (Level) {
 	end,
 
 	isTerminalTile = function(self, tile)
-		return true
+		return tile == "z" or tile == "0"
 	end,
 
 	isSolidFromBelow = function(self, tile, tilenum)
@@ -41,7 +41,7 @@ lvl = class.private "Level1" (Level) {
 	end,
 
 	isSolid = function(self, tile)
-		return not tile:match("[EJKLMfelnrstz02378+-]")
+		return not tile:match("[EJKLMfenrstz02378+-]")
 	end,
 
 	isDestructableTile = function(self, tile)
@@ -53,13 +53,13 @@ lvl = class.private "Level1" (Level) {
 	end,
 
 	activateTerminal = function(self, map, x, y)
-		do
-			return Dialog("The cake is a lie.")
-		end
 		local minigame = Hacking()
-		function minigame.callback(success)
-			if success then
-				map:modifyTile(x, y, "9")
+
+		if y == 29 and x >= 76 and x <= 77 then
+			function minigame.callback(success)
+				if success then
+					map:modifyTile(58, 38, "t")
+				end
 			end
 		end
 		return minigame
