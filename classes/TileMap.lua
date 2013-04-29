@@ -162,7 +162,7 @@ class "TileMap" {
 			love.graphics.draw(v.system, (v.x-0.5)*tilesize+x, v.y*tilesize+y)
 		end
 		for i, v in ipairs(self.sparks) do
-			love.graphics.draw(v.system, (v.x-0.5)*tilesize+x, v.y*tilesize+y)
+			love.graphics.draw(v.system, (v.x-0.5)*tilesize+x, v.y*tilesize+y-4)
 		end
 		for i, v in ipairs(self.batteries) do
 			love.graphics.draw(self.batteryImage, (v.x-1)*tilesize+x, (v.y-1)*tilesize+y)

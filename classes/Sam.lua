@@ -27,9 +27,9 @@ class "Sam"
 		map.level:transferAbilities(self)
 
 		self.map = map
-		self:spawn()
 		self:createThrustParticles()
 		self:createSprayParticles()
+		self:spawn()
 		self:update(0)
 	end,
 
@@ -60,6 +60,8 @@ class "Sam"
 	end,
 
 	spawn = function(self)
+		self.thrustSystem:stop()
+		self.spraySystem:stop()
 		self.position = {x=self.spawnPos.x,y=self.spawnPos.y}
 		self.velocity = {x=0,y=0}
 		self.acceleration = {x=0,y=0}

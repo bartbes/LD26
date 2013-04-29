@@ -51,7 +51,7 @@ lvl = class.private "Level2" (Level) {
 	
 	getSparkPositions = function(self)
 		return {
-			{11, 22},
+			{12, 22},
 		}
 	end,
 
