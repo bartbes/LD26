@@ -205,13 +205,14 @@ class "TileMap" {
 	destroyTile = function(self, x, y)
 		if not self:isDestructableTile(x, y) then return false end
 		local tile = self.tiles[y][x]
-		local newtile = self.level:destroyTile(encodeTile(tile), x, y)
+		local newtile = self.level:destroyTile(encodeTile(tile), x, y, self)
 		self:modifyTile(x, y, newtile)
 		return true
 	end,
 
-	modifyTile = function(self, x, y, target)
+	modifyTile = function(self, x, y, target, dontRebuild)
 		self.tiles[y][x] = decodeTile(target)
+		if dontRebuild then return end
 		self:buildBatch()
 	end,
 

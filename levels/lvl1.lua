@@ -45,11 +45,24 @@ lvl = class.private "Level1" (Level) {
 	end,
 
 	isDestructableTile = function(self, tile)
-		return tile == "d"
+		return tile == "d" or tile == "u"
 	end,
 
-	destroyTile = function(self, tile, x, y)
+	destroyTile = function(self, tile, x, y, map)
+		if tile == "u" then
+			self:destroyVent(map, x, y)
+			return "E"
+		end
 		return "-"
+	end,
+
+	destroyVent = function(self, map, x, y)
+		if map.tiles[y][x] ~= 46 then return end
+		map:modifyTile(x, y, "E", true)
+		self:destroyVent(map, x-1, y)
+		self:destroyVent(map, x+1, y)
+		self:destroyVent(map, x, y-1)
+		self:destroyVent(map, x, y+1)
 	end,
 
 	activateTerminal = function(self, map, x, y)
