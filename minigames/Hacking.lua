@@ -23,8 +23,6 @@ Hacking = class.private "Hacking" (Minigame) {
 		self.font = cache.font("fonts/PrStart.ttf:16")
 		self.overlay = cache.image("gfx/hackOverlay.png")
 		self.scanlines = cache.image("gfx/scanLines.png")
-
-		love.graphics.setFont(self.font)
 	end,
 
 	update = function(self, dt)
@@ -52,6 +50,7 @@ Hacking = class.private "Hacking" (Minigame) {
 	end,
 
 	draw = function(self)
+		love.graphics.setFont(self.font)
 		love.graphics.setColor(37, 41, 49)
 		love.graphics.rectangle('fill', 240, 60, 800, 600)
 		love.graphics.setColor(106, 217, 245)

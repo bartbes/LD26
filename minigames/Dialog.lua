@@ -11,7 +11,6 @@ Dialog = class.private "Dialog" (Minigame) {
 		self.pos = 1
 
 		self.font = cache.font("fonts/PrStart.ttf:16")
-		love.graphics.setFont(self.font)
 	end,
 
 	update = function(self, dt)
@@ -39,6 +38,7 @@ Dialog = class.private "Dialog" (Minigame) {
 	end,
 
 	draw = function(self)
+		love.graphics.setFont(self.font)
 		love.graphics.setColor(37, 41, 49)
 		love.graphics.rectangle('fill', 490, 240, 300, 80)
 

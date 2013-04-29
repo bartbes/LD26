@@ -3,11 +3,13 @@ require "classes.Sam"
 local cache = require "lib.cache"
 local state = require "state"
 local bgm = require "bgm"
+local Dialog = require "minigames.Dialog"
 
 local game = {}
 
 function game:load(level)
 	self.timer = 0
+	self.score = 0
 	self.map = TileMap.fromFile(level)
 	samTex = cache.image("gfx/sam.png")
 	lightTex = cache.image("gfx/flashlight.png")
@@ -19,6 +21,8 @@ function game:load(level)
 
 	bgm.start()
 	love.graphics.setBackgroundColor(200, 100, 120)
+
+	self.font = cache.font("fonts/PrStart.ttf:16")
 end
 
 function game:unload()
@@ -26,21 +30,34 @@ function game:unload()
 end
 
 function game:update(dt)
-	self.timer = self.timer + dt
 	bgm.update()
+	if sam.levelComplete then
+		if not self.minigame then
+			local dialogText = "Time:   %.2f\n" ..
+				"Score: %d\n" ..
+				"Total: %d\n"
+			local scoreTotal = math.floor(math.max(300-self.timer, 0)/5)
+			dialogText = dialogText:format(self.timer, self.score, scoreTotal)
+			self.minigame = Dialog(dialogText)
+		end
+		self.minigame:update(dt)
+		if self.minigame.open then
+			return
+		end
+
+		local nextlevel = self.map.level:getNextLevel()
+		if nextlevel then
+			return state.switch(self, nextlevel():getLevelFile())
+		else
+			return state.switch(THE_END)
+		end
+	end
+
+	self.timer = self.timer + dt
 	if sam.alive then
 		sam:update(dt)
 	else
 		sam:spawn()
-	end
-	if sam.levelComplete then
-		local nextlevel = self.map.level:getNextLevel()
-		if nextlevel then
-			love.timer.sleep(0.100)
-			state.switch(self, nextlevel():getLevelFile())
-		else
-			state.switch(THE_END)
-		end
 	end
 
 	if self.map.minigame then
@@ -51,6 +68,10 @@ function game:update(dt)
 	if self.minigame then
 		self.minigame:update(dt)
 		if not self.minigame.open then
+			if self.minigame.score then
+				self.score = self.score + self.minigame.score
+			end
+
 			self.minigame.callback(self.minigame.won)
 			self.minigame = nil
 		end
@@ -62,9 +83,11 @@ function game:draw()
 	love.graphics.scale(3, 3)
 	self.map:draw(sam.scroll.x, sam.scroll.y)
 	sam:draw()
-	drawFuelGuage()
+	self:drawFuelGuage()
 
 	love.graphics.pop()
+	self:drawScoreAndTime()
+
 	if self.minigame then
 		self.minigame:draw()
 	end
@@ -88,7 +111,7 @@ function game:keypressed(key, unicode)
 	end
 end
 
-function drawFuelGuage()
+function game:drawFuelGuage()
 	length = 32*(sam.fuel/100)
 	if sam.fuel < 25 then
 		love.graphics.setColor(191,55,59)
@@ -101,6 +124,12 @@ function drawFuelGuage()
 	love.graphics.setColor(0,0,0)
 	love.graphics.rectangle("line", 350, 6, 32, 7 )
 	love.graphics.setColor(255,255,255)
+end
+
+function game:drawScoreAndTime()
+	love.graphics.setFont(self.font)
+	love.graphics.print(("Time:  %.2f"):format(self.timer), 20, 20)
+	love.graphics.print(("Score: %d"):format(self.score), 20, 34)
 end
 
 return game
