@@ -136,7 +136,7 @@ class "TileMap" {
 	draw = function(self, x, y, ...)
 		love.graphics.draw(self.batch, math.floor(x), math.floor(y), ...)
 		for i, v in ipairs(self.fires) do
-			love.graphics.draw(v.system, (v.x+0.5)*tilesize+x, v.y*tilesize+y)
+			love.graphics.draw(v.system, (v.x-0.5)*tilesize+x, v.y*tilesize+y)
 		end
 		for i, v in ipairs(self.batteries) do
 			love.graphics.draw(self.batteryImage, (v.x-1)*tilesize+x, (v.y-1)*tilesize+y)
