@@ -8,10 +8,10 @@ class "Sam"
 {
 	__init__ = function(self, position, tex, map, lightTex, thrustParticle, sprayParticle)
 		self.spawnPos = position
-		self.tex = Anim(tex, 16, 32, 2)
+		self.tex = Anim(tex, 16, 32, 0.3)
 		self.lightTex = lightTex
-		self.texWidth = tex:getWidth()
-		self.texHeight = tex:getHeight()
+		self.texWidth = self.tex:getWidth()
+		self.texHeight = self.tex:getHeight()
 		self.lightWidth = lightTex:getWidth()
 		self.sfx = {}
 		self.laser = cache.image("gfx/laserSmall.png")

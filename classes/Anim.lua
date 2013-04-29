@@ -13,7 +13,7 @@ class "Anim" {
 
 		self.quads = {}
 		for y = 0, self.image:getHeight()-1, h do
-			for x = 0, self.image:getWidth()-1, w do
+			for x = 0, self.image:getWidth()-1, w+2 do
 				table.insert(self.quads, love.graphics.newQuad(x, y, w, h, self.image:getWidth(), self.image:getHeight()))
 			end
 		end
