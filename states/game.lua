@@ -5,6 +5,7 @@ local state = require "state"
 local bgm = require "bgm"
 local Dialog = require "minigames.Dialog"
 local Pausemenu = require "minigames.Pausemenu"
+local credits = require "states.credits"
 
 local game = {}
 
@@ -53,7 +54,7 @@ function game:update(dt)
 		if nextlevel then
 			return state.switch(self, nextlevel():getLevelFile())
 		else
-			return state.switch(THE_END)
+			return state.switch(credits)
 		end
 	end
 

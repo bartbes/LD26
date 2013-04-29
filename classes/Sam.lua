@@ -241,8 +241,6 @@ class "Sam"
 		elseif self.fuel < 0 then
 			self.fuel = 0
 		end
-		-- TODO: TAKE THIS OUT YOU BASTARD
-		self.fuel = 100
 
 	--POSITION
 		self.position.x = self.position.x + self.velocity.x * dt
@@ -363,8 +361,9 @@ class "Sam"
 		
 
 		--inWinningTile
-		if self.map:isWinningTile(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16))
-			or	self.map:isWinningTile(math.ceil((self.rightFoot.x-3)/16),math.floor(self.rightFoot.y/16))	then
+		if (self.map:isWinningTile(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16))
+			or	self.map:isWinningTile(math.ceil((self.rightFoot.x-3)/16),math.floor(self.rightFoot.y/16)))	and
+			self.map.level:canWin() then
 			self.levelComplete = true
 			self:updateSensors()
 		end

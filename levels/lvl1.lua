@@ -7,8 +7,10 @@ lvl = class.private "Level1" (Level) {
 	__init__ = function(self)
 		Level.__init__(self,
 			{x = 6, y = 36},
-			{x = 4, y = 6},
+			{x = 127, y = 33},
 			{})
+
+		self.teleporterActive = false
 	end,
 
 	levelStarted = function(self, map)
@@ -25,8 +27,11 @@ lvl = class.private "Level1" (Level) {
 			map.minigame = dlg3
 		end
 
-		-- TODO: ENABLE THIS
-		--map.minigame = dlg1
+		map.minigame = dlg1
+	end,
+
+	canWin = function(self)
+		return self.teleporterActive
 	end,
 
 	isDeadlyTile = function(self, tile)
@@ -34,7 +39,7 @@ lvl = class.private "Level1" (Level) {
 	end,
 
 	getNextLevel = function(self)
-		return lvl
+		return nil
 	end,
 
 	getLevelFile = function(self)
@@ -104,7 +109,10 @@ lvl = class.private "Level1" (Level) {
 			function minigame.callback(success)
 				if success then
 					map:modifyTile(98, 49, "t")
+					map:modifyTile(127, 33, "+")
+					map:modifyTile(127, 32, "2")
 					map.state.score = map.state.score + 10
+					self.teleporterActive = true
 					map.minigame = Dialog("Security hatch: UNLOCKED\nTeleporter: ACTIVATED")
 				end
 			end

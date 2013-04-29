@@ -29,9 +29,9 @@ gfx/levelOneTiles.png
 999999999999999999999ghhhhhhhhhhhhhhhhhhhhi---------ghhhi----------gi------rs-ghhhhhhhhhi-------------------ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 999999999999999999999ghhhhhhhhhhhhhhhhhhhhi---------ghhhi------FOOGgi------z0-ghhhhhhhhhi-------------------ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 999999999999999999999ghhhhhhhhhhhhhhhhhhhhi---------ghhhi----------gi--YZZZZZZkhhhhhhhhhi-------------------ghhhhhhhhhhhhhbpppppchhhhhhhhhhhhhhhhhh
-999999999999999999YZZkhhhhhhhhhhhhhhhhbpppq---------ghhhiFOOG------gi--oppppppchhhhhhhhhi--FGYZZZZZZZZa-----opppppppp5ppppq---2-ghhhhhhhhhhhhhhhhhh
-99999999999999999Ykhhhhhhhhhhhhhhhhhhhi-------------ghhhi----------gi---------ghhhhhhhhhi----ghhhhhhhhi-----fffffffffffffff---2-ghhhhhhhhhhhhhhhhhh
-99999999999999999ghhhhhhhhhhhhhhhhhhhhi-------------ghhhi------FOOGgi---------ghhhhhhhhhi----ghhhhhhhhi-----nnnnnnnnnnnnnnn---+-ghhhhhhhhhhhhhhhhhh
+999999999999999999YZZkhhhhhhhhhhhhhhhhbpppq---------ghhhiFOOG------gi--oppppppchhhhhhhhhi--FGYZZZZZZZZa-----opppppppp5ppppq-----ghhhhhhhhhhhhhhhhhh
+99999999999999999Ykhhhhhhhhhhhhhhhhhhhi-------------ghhhi----------gi---------ghhhhhhhhhi----ghhhhhhhhi-----fffffffffffffff-----ghhhhhhhhhhhhhhhhhh
+99999999999999999ghhhhhhhhhhhhhhhhhhhhi-------------ghhhi------FOOGgi---------ghhhhhhhhhi----ghhhhhhhhi-----nnnnnnnnnnnnnnn---3-ghhhhhhhhhhhhhhhhhh
 99999999999999999gbpp4pppppppchhhhhhhhi-------------ghhhi----------gi----Ya---ghhhhhhhhhi----ghhhhhhhhjZZZZZZZZZZZwZZZZZZZZZZZZZkhhhhhhhhhhhhhhhhhh
 9999BCCDHXXXXXXXXoq----------oppppppppq-------------ghhhiFOOOOOOG--oq----oq---opppppppppqFG--oppppppppppppppchhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 UUUAJKKLfffffffffff----------ffffffffff------------dghhhi---------------------fffffffffff-----------------d-ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
