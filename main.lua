@@ -9,6 +9,6 @@ function love.load(args)
 	if args[2] == "menu" then
 		state.switch(menu)
 	else
-		state.switch(game, "levels/lvl1.txt")
+		state.switch(game, "levels/lvl2.txt")
 	end
 end
