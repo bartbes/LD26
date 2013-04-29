@@ -1,5 +1,6 @@
 require "classes.Level"
 local Hacking = require "minigames.Hacking"
+local Dialog = require "minigames.Dialog"
 
 local lvl
 lvl = class.private "Level1" (Level) {
@@ -30,6 +31,9 @@ lvl = class.private "Level1" (Level) {
 	end,
 
 	activateTerminal = function(self, map, x, y)
+		do
+			return Dialog("The cake is a lie.")
+		end
 		local minigame = Hacking()
 		function minigame.callback(success)
 			if success then
