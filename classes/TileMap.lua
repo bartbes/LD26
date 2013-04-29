@@ -80,7 +80,26 @@ class "TileMap" {
 		self.width = maxtiles * tilesize
 		self.height = #self.tiles * tilesize
 
+		self.fires = {}
+		local fireLocations = self.level:getFirePositions()
+		for i, v in ipairs(fireLocations) do
+			self:createFire(v[1], v[2])
+		end
+
 		self:buildBatch()
+	end,
+
+	createFire = function(self, x, y)
+		local fire = love.graphics.newParticleSystem(cache.image("gfx/particle1.png"), 250)
+		fire:setEmissionRate(200)
+		fire:setLifetime(-1)
+		fire:setParticleLife(0.05, 0.15)
+		fire:setDirection(-math.pi/2)
+		fire:setSpeed(0, 80)
+		fire:setSpin(1, 2)
+		fire:setSpread(0.5)
+
+		table.insert(self.fires, {system = fire, x = x, y = y})
 	end,
 
 	buildBatch = function(self)
@@ -101,8 +120,17 @@ class "TileMap" {
 		self.batch:unbind()
 	end,
 
+	update = function(self, dt)
+		for i, v in ipairs(self.fires) do
+			v.system:update(dt)
+		end
+	end,
+
 	draw = function(self, x, y, ...)
-		return love.graphics.draw(self.batch, math.floor(x), math.floor(y), ...)
+		love.graphics.draw(self.batch, math.floor(x), math.floor(y), ...)
+		for i, v in ipairs(self.fires) do
+			love.graphics.draw(v.system, (v.x-0.5)*tilesize+x, v.y*tilesize+y)
+		end
 	end,
 
 	isSolid = function(self, x, y)
@@ -140,16 +168,22 @@ class "TileMap" {
 	end,
 
 	isFireTile = function(self, x, y)
-		local tile = self.tiles[y][x]
-		return self.level:isFireTile(encodeTile(tile))
+		for i, v in ipairs(self.fires) do
+			if v.x == x and v.y == y then
+				return true
+			end
+		end
+		return false
 	end,
 
 	extinguishTile = function(self, x, y)
-		if not self:isFireTile(x, y) then return false end
-		local tile = self.tiles[y][x]
-		local newtile = self.level:extinguishTile(encodeTile(tile))
-		self:modifyTile(x, y, newtile)
-		return true
+		for i, v in ipairs(self.fires) do
+			if v.x == x and v.y == y then
+				table.remove(self.fires, i)
+				return true
+			end
+		end
+		return false
 	end,
 
 	isTerminalTile = function(self, x, y)

@@ -26,6 +26,10 @@ lvl = class.private "Level1" (Level) {
 		return "levels/lvl1.txt"
 	end,
 
+	getFirePositions = function(self)
+		return {{26, 19}}
+	end,
+
 	isTerminalTile = function(self, tile)
 		return true
 	end,

@@ -54,6 +54,8 @@ function game:update(dt)
 		end
 	end
 
+	self.map:update(dt)
+
 	if self.map.minigame then
 		self.minigame = self.map.minigame
 		self.map.minigame = nil

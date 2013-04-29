@@ -347,7 +347,7 @@ class "Sam"
 		end
 
 		if self.extinguishing and self.map:isFireTile(self.adjacentTile.x,self.adjacentTile.y) then
-			self.map.extinguishTile(self.adjacentTile.x,self.adjacentTile.y)
+			self.map:extinguishTile(self.adjacentTile.x,self.adjacentTile.y)
 		end
 
 		--TODO flashlight

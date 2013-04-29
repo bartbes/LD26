@@ -15,6 +15,10 @@ class "Level" {
 		return self.spawn
 	end,
 
+	getFirePositions = function(self)
+		return {}
+	end,
+
 	isSolid = function(self, tile, tilenum)
 		return tilenum < 52
 	end,
