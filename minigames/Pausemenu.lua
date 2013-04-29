@@ -31,20 +31,21 @@ Pausemenu = class.private "Pausemenu" (Minigame) {
 	draw = function(self)
 		love.graphics.setFont(self.font)
 		love.graphics.setColor(37, 41, 49)
-		love.graphics.rectangle('fill', 340, 240, 600, 200)
+		love.graphics.rectangle('fill', 330, 240, 620, 200)
 
 		love.graphics.setColor(106, 217, 245)
-		love.graphics.printf("> PAUSED <", 350, 250, 580, "center")
-		love.graphics.printf("Press Esc to quit, and anything else to continue", 350, 270, 580, "center")
+		love.graphics.printf("> PAUSED <", 340, 250, 580, "center")
+		love.graphics.printf("Press Esc to quit, and anything else to continue", 340, 270, 580, "center")
 
-		love.graphics.print("Score:        " .. self.score, 350, 330)
-		love.graphics.print(("Time:  %.2f"):format(self.time), 700, 330)
+		love.graphics.print("Score:        " .. self.score, 340, 330)
+		love.graphics.print(("Time:  %.2f"):format(self.time), 690, 330)
 
-		love.graphics.print("Rocket jump:  " .. toOnline(self.abilities.rocketJump), 350, 370)
-		love.graphics.print("Flashlight:   " .. toOnline(self.abilities.flashlight), 350, 390)
-		love.graphics.print("Extinguisher: " .. toOnline(self.abilities.extinguisher), 350, 410)
-		love.graphics.print("Boost: " .. toOnline(self.abilities.boost), 700, 370)
-		love.graphics.print("Laser: " .. toOnline(self.abilities.laser), 700, 390)
+		love.graphics.print("Rocket Jump:  " .. toOnline(self.abilities.rocketJump), 340, 370)
+		love.graphics.print("Flashlight:   " .. toOnline(self.abilities.flashlight), 340, 390)
+		love.graphics.print("Extinguisher: " .. toOnline(self.abilities.extinguisher), 340, 410)
+		love.graphics.print("Boost:   " .. toOnline(self.abilities.boost), 690, 370)
+		love.graphics.print("Laser:   " .. toOnline(self.abilities.laser), 690, 390)
+		love.graphics.print("Hacking: " .. toOnline(self.abilities.hacking), 690, 410)
 
 		love.graphics.setColor(255, 255, 255)
 	end,

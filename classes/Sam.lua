@@ -18,7 +18,8 @@ class "Sam"
 			boost = true,
 			flashlight = true,
 			extinguisher = true,
-			laser = true
+			laser = true,
+			hacking = true,
 		}
 		map.level:transferAbilities(self)
 
@@ -145,7 +146,7 @@ class "Sam"
 	end,
 
 	interactWithTerminal = function(self)
-		if self.map:isTerminalTile(self.adjacentTile.x,self.adjacentTile.y) then
+		if self.abilities.hacking and self.map:isTerminalTile(self.adjacentTile.x,self.adjacentTile.y) then
 			self.map:activateTerminal(self.adjacentTile.x,self.adjacentTile.y)
 		end
 	end,
