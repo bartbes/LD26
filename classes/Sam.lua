@@ -145,9 +145,14 @@ class "Sam"
 		end
 	end,
 
+	
 	interactWithTerminal = function(self)
-		if self.abilities.hacking and self.map:isTerminalTile(self.adjacentTile.x,self.adjacentTile.y) then
-			self.map:activateTerminal(self.adjacentTile.x,self.adjacentTile.y)
+		if self.abilities.hacking then
+			if self.map:isTerminalTile(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16)) then
+				self.map:activateTerminal(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16))
+			elseif self.map:isTerminalTile(math.ceil((self.rightFoot.x-3)/16),math.floor(self.rightFoot.y/16)) then
+				self.map:activateTerminal(math.ceil((self.rightFoot.x-3)/16),math.floor(self.rightFoot.y/16)) 
+			end
 		end
 	end,
 
