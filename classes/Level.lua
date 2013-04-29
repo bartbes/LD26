@@ -10,6 +10,10 @@ class "Level" {
 	levelStarted = function(self, map)
 	end,
 
+	canWin = function(self)
+		return false
+	end,
+
 	getTarget = function(self)
 		return self.target
 	end,
