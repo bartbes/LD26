@@ -176,7 +176,7 @@ class "Sam"
 			self.acceleration.y =self.acceleration.y + 100
 		end
 
-		if not self.onGround and not self.jumping and love.keyboard.isDown(" ") and self.fuel > 0 and self.abilities.rocketJump then
+		if not self.onGround and not self.jumping and love.keyboard.isDown(" ","w","up") and self.fuel > 0 and self.abilities.rocketJump then
 			if not self.sfx.jetpack then
 				self.thrustSystem:start()
 				self.sfx.jetpack = sfx.play("jetpack")
