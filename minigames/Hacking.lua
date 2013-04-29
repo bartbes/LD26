@@ -48,7 +48,9 @@ Hacking = class.private "Hacking" (Minigame) {
 	end,
 
 	keypressed = function(self, key, unicode)
-		Minigame.keypressed(self, key, unicode)
+		if key == "escape" then
+			self:close(self.pos == #self.password)
+		end
 
 		key = key:match("^kp(%d)$") or key:match("%d")
 		if not key or self.pos == #self.password or self.failed then return end
