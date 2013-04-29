@@ -6,7 +6,7 @@ Dialog = class.private "Dialog" (Minigame) {
 	__init__ = function(self, text, speed)
 		Minigame.__init__(self)
 
-		self.speed = speed or 5
+		self.speed = speed or 10
 		self.text = text
 		self.pos = 1
 
