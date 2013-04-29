@@ -15,8 +15,9 @@ local entries = {
 function menu:load()
 	self.selection = 1
 
-	self.bigfont = cache.font("fonts/PrStart.ttf:32")
+	--self.bigfont = cache.font("fonts/PrStart.ttf:32")
 	self.smallfont = cache.font("fonts/PrStart.ttf:26")
+	self.title = cache.image("gfx/logotype.jpg")
 end
 
 function menu:keypressed(key)
@@ -32,9 +33,10 @@ function menu:keypressed(key)
 end
 
 function menu:draw()
-	love.graphics.setFont(self.bigfont)
-	love.graphics.printf("S.A.M.", 0, 100, 1280, "center")
-	love.graphics.printf("Rescue in Space", 0, 140, 1280, "center")
+	--love.graphics.setFont(self.bigfont)
+	--love.graphics.printf("S.A.M.", 0, 100, 1280, "center")
+	--love.graphics.printf("Rescue in Space", 0, 140, 1280, "center")
+	love.graphics.draw(self.title, 640, 60, 0, 0.75, 0.75, 400, 0)
 
 	love.graphics.setFont(self.smallfont)
 	local left, right = "> ", " <"
@@ -45,7 +47,7 @@ function menu:draw()
 			str = left .. str .. right
 		end
 
-		love.graphics.printf(str, 0, 200+36*i, 1280, "center")
+		love.graphics.printf(str, 0, 350+36*i, 1280, "center")
 	end
 end
 
