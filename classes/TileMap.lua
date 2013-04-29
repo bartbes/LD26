@@ -86,6 +86,9 @@ class "TileMap" {
 			self:createFire(v[1], v[2])
 		end
 
+		self.batteries = {}
+		self.batteryImage = cache.image("gfx/SamTest.png")
+
 		self:buildBatch()
 	end,
 
@@ -100,6 +103,10 @@ class "TileMap" {
 		fire:setSpread(0.5)
 
 		table.insert(self.fires, {system = fire, x = x, y = y})
+	end,
+
+	createBattery = function(self, x, y)
+		table.insert(self.batteries, {x = x, y = y})
 	end,
 
 	buildBatch = function(self)
@@ -131,6 +138,9 @@ class "TileMap" {
 		for i, v in ipairs(self.fires) do
 			love.graphics.draw(v.system, (v.x-0.5)*tilesize+x, v.y*tilesize+y)
 		end
+		for i, v in ipairs(self.batteries) do
+			love.graphics.draw(self.batteryImage, (v.x-1)*tilesize+x, (v.y-1)*tilesize+y)
+		end
 	end,
 
 	isSolid = function(self, x, y)
@@ -150,6 +160,15 @@ class "TileMap" {
 		end
 
 		return solid
+	end,
+
+	isOnTile = function(self, x, y)
+		for i, v in ipairs(self.batteries) do
+			if v.x == x and v.y == y then
+				table.remove(self.batteries, i)
+				self.state.score = self.state.score + 5
+			end
+		end
 	end,
 
 	isDeadlyTile = function(self, x, y)

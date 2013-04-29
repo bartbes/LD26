@@ -369,6 +369,10 @@ class "Sam"
 			self.alive = false
 		end
 
+		-- Battery
+		self.map:isOnTile(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16))
+		self.map:isOnTile(math.ceil((self.rightFoot.x-3)/16),math.floor(self.rightFoot.y/16))
+
 		-- adjacent Tile
 		if self.facingRight then
 				self.adjacentTile.x = math.ceil((self.rightFoot.x-3)/16)+1

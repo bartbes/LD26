@@ -53,7 +53,10 @@ lvl = class.private "Level1" (Level) {
 			self:destroyVent(map, x, y)
 			return "E"
 		end
-		return "-"
+		if tile == "d" then
+			map:createBattery(x, y)
+			return "-"
+		end
 	end,
 
 	destroyVent = function(self, map, x, y)

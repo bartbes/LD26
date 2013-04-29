@@ -12,6 +12,7 @@ function game:load(level)
 	self.timer = 0
 	self.score = 0
 	self.map = TileMap.fromFile(level)
+	self.map.state = self
 	samTex = cache.image("gfx/sam.png")
 	lightTex = cache.image("gfx/flashlight.png")
 	thrustParticle = cache.image("gfx/particle1.png")
