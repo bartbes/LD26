@@ -6,25 +6,18 @@ local lvl
 lvl = class.private "Level2" (Level) {
 	__init__ = function(self)
 		Level.__init__(self,
-			{x = 6, y = 36},
+			{x = 9, y = 6},
 			{x = 127, y = 33},
-			{})
+			{laser = false})
 
 		self.teleporterActive = false
 	end,
 
 	levelStarted = function(self, map)
-		local dlg1 = Dialog("Hello, S.A.M. Use the arrow keys or WASD to move, " ..
-			"and space to jump.")
-		local dlg2 = Dialog("You can use your extinguisher with X, and hack " ..
-			"terminals with I.")
-		local dlg3 = Dialog("Turn on your flashlight with F, and fire your laser " ..
-			"with L.")
+		local dlg1 = Dialog("CHANGE IN MOLECULAR STRUCTURE DETECTED!")
+		local dlg2 = Dialog("Laser status: OFFLINE")
 		dlg1.callback = function()
 			map.minigame = dlg2
-		end
-		dlg2.callback = function()
-			map.minigame = dlg3
 		end
 
 		map.minigame = dlg1
