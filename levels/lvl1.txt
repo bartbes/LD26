@@ -34,8 +34,8 @@ gfx/levelOneTiles.png
 99999999999999999ghhhhhhhhhhhhhhhhhhhhi-------------ghhhi------FOOGgi---------ghhhhhhhhhi----ghhhhhhhhi-----nnnnnnnnnnnnnnn---+-ghhhhhhhhhhhhhhhhhh
 99999999999999999gbpp4pppppppchhhhhhhhi-------------ghhhi----------gi----Ya---ghhhhhhhhhi----ghhhhhhhhjZZZZZZZZZZZwZZZZZZZZZZZZZkhhhhhhhhhhhhhhhhhh
 9999BCCDHXXXXXXXXoq----------oppppppppq-------------ghhhiFOOOOOOG--oq----oq---opppppppppqFG--oppppppppppppppchhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-UUUAJKKLfffffffffff----------ffffffffff------------dghhhi---------------------fffffffffff-------------------ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-VVVIMKKLnnnnnnnnnnn----------nnnnnnnnnn-------d---ddghhhi---------------------nnnnnnnnnnn-------------------ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+UUUAJKKLfffffffffff----------ffffffffff------------dghhhi---------------------fffffffffff-----------------d-ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+VVVIMKKLnnnnnnnnnnn----------nnnnnnnnnn-------d---ddghhhi---------------------nnnnnnnnnnn----------------dd-ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 WWWQRSSTPvvvvvvvvYZZZZZZZyZZZZZZZZZZZZZZZZZZxZZZZZZZkhhhilYZZZZZZZZZZwZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZxZZZZZZkhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 99999999999999999opppppppchhhhhhhhhhhhhhhhhhhhhhhhhhhhhhi-ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 9999999999999999999999999ochhhhhhhhhhhhhhhhhhhhhhhhhhhhhi-oppppppppp4ppchhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
@@ -52,7 +52,7 @@ WWWQRSSTPvvvvvvvvYZZZZZZZyZZZZZZZZZZZZZZZZZZxZZZZZZZkhhhilYZZZZZZZZZZwZZZZZZZZZZ
 999999999999999999999999999999999999999999999999ghhhhhhhi-----FOOOG----ghhhhhhhhhhhi--------ghhhi------ghhhhhhhhhhhhhhhhhhhhhhEEhhhhhhhhhhhhhhhhhhh
 999999999999999999999999999999999999999999999999ghhhhhhhi--------------ghhhhhhhhhhhiFOG-----ghhhi------ghhhhhhhhhhhhhhhhhhhhhhEEhhhhhhhhhhhhhhhhhhh
 999999999999999999999999999999999999999999999999ghhhhhhhiFG----------FGghhhhhhhhhhhi--------ghhhiFOG---ghhhhhhhhhhhhhhhhhhhhhhEEhhhhhhhhhhhhhhhhhhh
-999999999999999999999999999999999999999999999999ghhhhhhhi--------------ghhhhhhhhhhhi--------ghhhi------ghhhhhhhhhhhhhhhhhhhhEEEEhhhhhhhhhhhhhhhhhhh
+999999999999999999999999999999999999999999999999ghhhhhhhi-------d------ghhhhhhhhhhhi--------ghhhi------ghhhhhhhhhhhhhhhhhhhhEEEEhhhhhhhhhhhhhhhhhhh
 999999999999999999999999999999999999999999999999ghhhhhhhi-----FOOOG----oppppppppppppFOOG----op5pq---FOGghhhhhhhhhhhhhhhhhhhhEEEEhhhhhhhhhhhhhhhhhhh
 999999999999999999999999999999999999999999999999ghhhhhhhi--------------fffffffffffff-------------------ghhhhhhhhhhhhhhhhhhhhEEhhhhhhhhhhhhhhhhhhhhh
 999999999999999999999999999999999999999999999999ghhhhhhhi-dd-----------nnnnnnnnnnnnn-------------------ghhhhhhhhhhhhhhhhhhhhEEhhhhhhhhhhhhhhhhhhhhh
