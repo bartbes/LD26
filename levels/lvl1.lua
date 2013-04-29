@@ -103,6 +103,14 @@ lvl = class.private "Level1" (Level) {
 					map.minigame = Dialog("Security hatch: UNLOCKED")
 				end
 			end
+		elseif y == 48 and x >= 103 and x <= 104 then
+			function minigame.callback(success)
+				if success then
+					map:modifyTile(98, 49, "t")
+					map.state.score = map.state.score + 10
+					map.minigame = Dialog("Security hatch: UNLOCKED\nTeleporter: ACTIVATED")
+				end
+			end
 		end
 		return minigame
 	end,
