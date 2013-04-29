@@ -25,6 +25,8 @@ function game:load(level)
 	love.graphics.setBackgroundColor(100, 108, 111)
 
 	self.font = cache.font("fonts/PrStart.ttf:16")
+
+	self.map.level:levelStarted(self.map)
 end
 
 function game:unload()
@@ -103,7 +105,7 @@ function game:keypressed(key, unicode)
 		return self.minigame:keypressed(key, unicode)
 	end
 
-	if key == " " then
+	if key == " " or key == "w" or key == "up" then
 		sam:jump()
 	elseif key == "b" then
 		sam:dash()

@@ -7,6 +7,9 @@ class "Level" {
 		self.abilities = assert(abilities, "No abilities given")
 	end,
 
+	levelStarted = function(self, map)
+	end,
+
 	getTarget = function(self)
 		return self.target
 	end,

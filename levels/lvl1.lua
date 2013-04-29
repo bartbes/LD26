@@ -11,6 +11,24 @@ lvl = class.private "Level1" (Level) {
 			{})
 	end,
 
+	levelStarted = function(self, map)
+		local dlg1 = Dialog("Hello, S.A.M. Use the arrow keys or WASD to move, " ..
+			"and space to jump.")
+		local dlg2 = Dialog("You can use your extinguisher with X, and hack " ..
+			"terminals with I.")
+		local dlg3 = Dialog("Turn on your flashlight with F, and fire your laser " ..
+			"with L.")
+		dlg1.callback = function()
+			map.minigame = dlg2
+		end
+		dlg2.callback = function()
+			map.minigame = dlg3
+		end
+
+		-- TODO: ENABLE THIS
+		--map.minigame = dlg1
+	end,
+
 	isDeadlyTile = function(self, tile)
 		if tile == "5" then
 			return true
