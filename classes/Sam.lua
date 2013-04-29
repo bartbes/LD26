@@ -408,13 +408,27 @@ class "Sam"
 			self.sfx.extinguish:setVolume(self.sfx.extinguishFade)
 		end
 
+		
 		if self.extinguishing and self.map:isFireTile(self.adjacentTile.x,self.adjacentTile.y) then
-			self.map:extinguishTile(self.adjacentTile.x,self.adjacentTile.y)
+			local id = self.adjacentTile.x .. "," .. self.adjacentTile.y
+			if self.fireId == id then
+				self.fireTimer = self.fireTimer + dt
+				if self.fireTimer > 2 then
+					self.map:extinguishTile(self.adjacentTile.x,self.adjacentTile.y)
+					self.fireId = nil
+				end
+			else
+				self.fireId = id
+				self.fireTimer = 0
+			end
+		else
+			self.fireId = nil
 		end
-
-		--TODO flashlight
-
-
+		
+		
+		
+		
+		
 		--scroll
 		self.scroll.x = math.min(0, -self.position.x + 140)
 		self.scroll.x = math.max(self.scroll.x, -self.map:getWidth()+427)
