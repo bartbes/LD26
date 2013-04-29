@@ -1,5 +1,6 @@
 require "lib/slither"
 require "classes.TileMap"
+require "classes.Anim"
 local sfx = require "sfx"
 local cache = require "lib.cache"
 
@@ -7,7 +8,7 @@ class "Sam"
 {
 	__init__ = function(self, position, tex, map, lightTex, thrustParticle, sprayParticle)
 		self.spawnPos = position
-		self.tex = tex
+		self.tex = Anim(tex, 16, 32, 2)
 		self.lightTex = lightTex
 		self.texWidth = tex:getWidth()
 		self.texHeight = tex:getHeight()
@@ -105,11 +106,11 @@ class "Sam"
 
 		if self.facingRight then
 			love.graphics.draw(self.thrustSystem,self.screenPosition.x+1, self.screenPosition.y+28)
-			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y)
+			self.tex:draw(self.screenPosition.x, self.screenPosition.y)
 			love.graphics.draw(self.spraySystem,self.screenPosition.x -1 + self.texWidth, self.screenPosition.y+25)
 		else
 			love.graphics.draw(self.thrustSystem,self.screenPosition.x + self.texWidth - 1, self.screenPosition.y+28,0,-1,1)
-			love.graphics.draw(self.tex, self.screenPosition.x, self.screenPosition.y,0,-1,1,self.texWidth,0)
+			self.tex:draw(self.screenPosition.x, self.screenPosition.y,0,-1,1,self.texWidth,0)
 			love.graphics.draw(self.spraySystem,self.screenPosition.x +1, self.screenPosition.y+25,0,-1,1)
 		end
 
@@ -173,6 +174,7 @@ class "Sam"
 
 	update = function(self,dt)
 
+		self.tex:update(dt)
 		self.thrustSystem:update(dt)
 		self.spraySystem:update(dt)
 
@@ -261,10 +263,12 @@ class "Sam"
 
 		if moving and not self.sfx.motor then
 			self.sfx.motor = sfx.play("motor", true)
+			self.tex:play()
 		end
 		if not moving and self.sfx.motor then
 			self.sfx.motor:stop()
 			self.sfx.motor = nil
+			self.tex:stop()
 		end
 
 
