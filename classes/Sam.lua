@@ -262,10 +262,28 @@ class "Sam"
 
 
 		self:updateSensors()
+		if math.abs(self.velocity.x) > math.abs(self.velocity.y) then
+		
+		--left
+		if self.map:isSolidFromBelow(math.ceil(self.leftFoot.x/16),math.ceil((self.leftFoot.y-3)/16))
+			or self.map:isSolidFromBelow(math.ceil(self.leftHand.x/16),math.ceil((self.leftHand.y+3)/16))	then
+			self.position.x =  math.ceil(self.position.x/16) * 16
+			self.velocity.x = 0
+			self:updateSensors()
+		end
 
+		--right
+		if self.map:isSolidFromBelow(math.ceil((self.rightFoot.x)/16),math.ceil((self.rightFoot.y-3)/16))
+			or self.map:isSolidFromBelow(math.ceil((self.rightHand.x)/16),math.ceil((self.rightHand.y+3)/16))	then
+			self.position.x = (math.floor((self.position.x )/16) * 16)
+			self.velocity.x = 0
+			self:updateSensors()
+		end
+		
 		--ceiling
-		if self.map:isSolidFromBelow(math.ceil((self.leftHand.x+3)/16),math.ceil((self.leftHand.y)/16))
-			or self.map:isSolidFromBelow(math.ceil((self.rightHand.x-3)/16),math.ceil(self.rightHand.y/16)) then
+		if (self.map:isSolidFromBelow(math.ceil((self.leftHand.x+3)/16),math.ceil((self.leftHand.y)/16))
+			or self.map:isSolidFromBelow(math.ceil((self.rightHand.x-3)/16),math.ceil(self.rightHand.y/16)))
+			and self.velocity.y < 0 then
 			self.position.y = (math.ceil((self.position.y +7 )/16) * 16 ) -7
 			self.velocity.y = 0
 			self:updateSensors()
@@ -286,7 +304,34 @@ class "Sam"
 		else
 			self.onGround = false
 		end
+		
+		else 
+		
+		--ceiling
+		if (self.map:isSolidFromBelow(math.ceil((self.leftHand.x+3)/16),math.ceil((self.leftHand.y)/16))
+			or self.map:isSolidFromBelow(math.ceil((self.rightHand.x-3)/16),math.ceil(self.rightHand.y/16)))
+			and self.velocity.y < 0 then
+			self.position.y = (math.ceil((self.position.y +7 )/16) * 16 ) -7
+			self.velocity.y = 0
+			self:updateSensors()
+		end
 
+		--floor
+		if (self.map:isSolid(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16)+1)
+			or	self.map:isSolid(math.ceil((self.rightFoot.x-3)/16),math.floor(self.rightFoot.y/16)+1))
+			and (self.velocity.y > 0 or self.onGround)
+			and self.position.y - (math.floor(self.position.y/16) * 16) < 5 then
+			self.position.y = math.floor(self.position.y/16) * 16
+
+			if not self.onGround then
+				sfx.play("land2", false, 0.75)
+			end
+			self.onGround = true
+			self:updateSensors()
+		else
+			self.onGround = false
+		end
+		
 		--left
 		if self.map:isSolidFromBelow(math.ceil(self.leftFoot.x/16),math.ceil((self.leftFoot.y-3)/16))
 			or self.map:isSolidFromBelow(math.ceil(self.leftHand.x/16),math.ceil((self.leftHand.y+3)/16))	then
@@ -302,8 +347,9 @@ class "Sam"
 			self.velocity.x = 0
 			self:updateSensors()
 		end
-
-
+		
+		end
+		
 
 		--inWinningTile
 		if self.map:isWinningTile(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16))
@@ -392,12 +438,12 @@ class "Sam"
 				while  not self.map:isSolid(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y+3)/16)) do
 					i = i+1
 				end
-				if self.map:isDestructableTile(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y+3)/16)) then
-					local id = math.ceil((self.rightHand.x)/16)+i .. "," .. math.ceil((self.rightHand.y+3)/16)
+				if self.map:isDestructableTile(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y)/16)) then
+					local id = math.ceil((self.rightHand.x)/16)+i .. "," .. math.ceil((self.rightHand.y)/16)
 					if self.laserId == id then
 						self.laserTimer = self.laserTimer + dt
 						if self.laserTimer > 3 then
-							self.map:destroyTile(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y+3)/16))
+							self.map:destroyTile(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y)/16))
 							self.laserId = nil
 						end
 					else
