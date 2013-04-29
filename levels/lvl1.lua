@@ -6,7 +6,7 @@ local lvl
 lvl = class.private "Level1" (Level) {
 	__init__ = function(self)
 		Level.__init__(self,
-			{x = 5, y = 16},
+			{x = 10, y = 6},
 			{x = 4, y = 6},
 			{})
 	end,
@@ -28,6 +28,14 @@ lvl = class.private "Level1" (Level) {
 
 	isTerminalTile = function(self, tile)
 		return true
+	end,
+
+	isSolidFromBelow = function(self, tile, tilenum)
+		return not tile:match("[FGO]")
+	end,
+
+	isSolid = function(self, tile)
+		return not tile:match("[JKLMfelnrstz02378+-]")
 	end,
 
 	activateTerminal = function(self, map, x, y)
