@@ -83,6 +83,9 @@ function game:update(dt)
 		sam:update(dt)
 	else
 		sam:spawn()
+		sam:update(0)
+		self.minigame = Dialog("Mission Failure")
+		
 	end
 end
 
