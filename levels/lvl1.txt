@@ -21,8 +21,8 @@ gfx/levelOneTiles.png
 999999999999999999999ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhEEhhhhhhhhhh
 999999999999999999999ghhhhhhhhhhhhhhhhhhhhhhhhbppp5ppppppppppppppppppppppppppchhhhhhhhhhhhhhhhhhhEEhhhhhhhhhh
 999999999999999999999ghhhhhhhhhhhhhhhhhhhhhb6pq------------------------------ochhhhhhhhhhhhhhhhhhEEhhhhhhhhhh
-999999999999999999999ghhhhhhhhhhhhhhhhhhhhhi---------------------------------EEEEEEEEEEEEEEEEEEEEEEhhhhhhhhhh
-999999999999999999999ghhhhhhhhhhhhhhhhhhhhbq---------------------------------EEEEEEEEEEEEEEEEEEEEEEhhhhhhhhhh
+999999999999999999999ghhhhhhhhhhhhhhhhhhhhhi----------------------------------EEEEEEEEEEEEEEEEEEEEEhhhhhhhhhh
+999999999999999999999ghhhhhhhhhhhhhhhhhhhhbq----------------------------------EEEEEEEEEEEEEEEEEEEEEhhhhhhhhhh
 999999999999999999999ghhhhhhhhhhhhhhhhhhhhi-----------------------YZZZZZZZZZZZkhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 999999999999999999999ghhhhhhhhhhhhhhhhhhhhi---------YZZZa---------ocbpppppppppchhhhhhhhhbpppppppppppppppppppp
 999999999999999999999ghhhhhhhhhhhhhhhhhhhhi---------ghhhiFOOG------gi---------ghhhhhhhhhi--------------------
@@ -34,8 +34,8 @@ gfx/levelOneTiles.png
 99999999999999999ghhhhhhhhhhhhhhhhhhhhi-------------ghhhi------FOOGgi---------ghhhhhhhhhi--------------------
 99999999999999999gbpp4pppppppchhhhhhhhi-------------ghhhi----------gi----Ya---ghhhhhhhhhi--------------------
 9999BCCDHXXXXXXXXoq----------oppppppppq-------------ghhhiFOOOOOOG--oq----oq---opppppppppq--------------------
-UUUAJKKLfffffffffff----------ffffffffff------------dghhhi---------------------fffffffffff--------------------
-VVVIMKKLnnnnnnnnnnn----------nnnnnnnnnn-------d---ddghhhi---------------------nnnnnnnnnnn--------------------
+UUUAJKKLfffffffffff--u-------ffffffffff------------dghhhi---------------------fffffffffff--------------------
+VVVIMKKLnnnnnnnnnnn--u-------nnnnnnnnnn-------d---ddghhhi---------------------nnnnnnnnnnn--------------------
 WWWQRSSTPvvvvvvvvYZZZZZZZyZZZZZZZZZZZZZZZZZZxZZZZZZZkhhhilYZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
 99999999999999999opppppppchhhhhhhhhhhhhhhhhhhhhhhhhhhhhhi-ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 9999999999999999999999999ochhhhhhhhhhhhhhhhhhhhhhhhhhhhhi-oppppppppppppppppppppchhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
@@ -58,9 +58,9 @@ WWWQRSSTPvvvvvvvvYZZZZZZZyZZZZZZZZZZZZZZZZZZxZZZZZZZkhhhilYZZZZZZZZZZZZZZZZZZZZZ
 999999999999999999999999999999999999999999999999ghhhhhhhi--------------nnnnnnnnnnnnn-------------------ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 999999999999999999999999999999999999999999999999ghhhhhhhjZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZa---YZZZjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhi---ghhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhbpppppppppppq---oppppppppp
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhi------------------------EEEE
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhi---dd-d-----------------EEEE
+hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhbpppppppppppq---opppppppop
+hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhi------------------------uEEE
+hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhi---dd-d-----------------uEEE
 hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhkZZZZZZZZZZZZZZZZZZZZZZZZjhEE
 hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhkhhhhhhhhhhhhhhhhhhhhhhhhhhEE
 hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhkhhhhhhhhhhhhhhhhhhhhhhhhhhEE
