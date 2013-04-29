@@ -44,6 +44,14 @@ lvl = class.private "Level1" (Level) {
 		return not tile:match("[EJKLMfelnrstz02378+-]")
 	end,
 
+	isDestructableTile = function(self, tile)
+		return tile == "d"
+	end,
+
+	destroyTile = function(self, tile, x, y)
+		return "-"
+	end,
+
 	activateTerminal = function(self, map, x, y)
 		do
 			return Dialog("The cake is a lie.")

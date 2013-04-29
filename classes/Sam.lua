@@ -87,7 +87,7 @@ class "Sam"
 			if self.laserId then
 				local x, y = self.laserId:match("(%d+),(%d+)")
 				love.graphics.setColor(255, 0, 0, 150*(self.laserTimer/3))
-				love.graphics.rectangle('fill', (x-1)*16-self.scroll.x, (y-1)*16+self.scroll.y, 16, 16)
+				love.graphics.rectangle('fill', (x-1)*16+self.scroll.x, (y-1)*16+self.scroll.y, 16, 16)
 			end
 			love.graphics.setColor(255,255,255)
 		end
@@ -393,6 +393,7 @@ class "Sam"
 						self.laserTimer = self.laserTimer + dt
 						if self.laserTimer > 3 then
 							self.map:destroyTile(math.ceil((self.rightHand.x)/16)+i,math.ceil((self.rightHand.y+3)/16))
+							self.laserId = nil
 						end
 					else
 						self.laserId = id
@@ -415,6 +416,7 @@ class "Sam"
 						self.laserTimer = self.laserTimer + dt
 						if self.laserTimer > 3 then
 							self.map:destroyTile(math.ceil((self.leftHand.x)/16)+i,math.ceil((self.leftHand.y+3)/16))
+							self.laserId = nil
 						end
 					else
 						self.laserId = id

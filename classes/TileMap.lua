@@ -205,7 +205,7 @@ class "TileMap" {
 	destroyTile = function(self, x, y)
 		if not self:isDestructableTile(x, y) then return false end
 		local tile = self.tiles[y][x]
-		local newtile = self.level:extinguishTile(encodeTile(tile), x, y)
+		local newtile = self.level:destroyTile(encodeTile(tile), x, y)
 		self:modifyTile(x, y, newtile)
 		return true
 	end,
