@@ -31,7 +31,9 @@ lvl = class.private "Level1" (Level) {
 	end,
 
 	isSolidFromBelow = function(self, tile, tilenum)
-		return not tile:match("[FGO]")
+		if tile:match("[FGO]") then
+			return false
+		end
 	end,
 
 	isSolid = function(self, tile)
