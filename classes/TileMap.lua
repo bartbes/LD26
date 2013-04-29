@@ -108,7 +108,8 @@ class "TileMap" {
 	isSolid = function(self, x, y)
 		if not self.tiles[y] then return false end
 		if not self.tiles[y][x] then return false end
-		return self.tiles[y][x] < 52 -- 0 and on
+		local tile = self.tiles[y][x]
+		return self.level:isSolid(encodeTile(tile), tile)
 	end,
 	
 	isDeadlyTile = function(self, x, y)

@@ -15,6 +15,10 @@ class "Level" {
 		return self.spawn
 	end,
 
+	isSolid = function(self, tile, tilenum)
+		return tilenum < 52
+	end,
+
 	isDeadlyTile = function(self, tile)
 		return false
 	end,
