@@ -21,7 +21,7 @@ function game:load(level)
 	sam = Sam(pos, samTex, self.map, lightTex, thrustParticel, sprayParticle)
 
 	bgm.start()
-	love.graphics.setBackgroundColor(111, 136, 146)
+	love.graphics.setBackgroundColor(100, 108, 111)
 
 	self.font = cache.font("fonts/PrStart.ttf:16")
 end
