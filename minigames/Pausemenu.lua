@@ -38,7 +38,7 @@ Pausemenu = class.private "Pausemenu" (Minigame) {
 		love.graphics.printf("Press Esc to quit, and anything else to continue", 340, 270, 580, "center")
 
 		love.graphics.print("Score:        " .. self.score, 340, 330)
-		love.graphics.print(("Time:  %.2f"):format(self.time), 690, 330)
+		love.graphics.print(("Time:    %.2f"):format(self.time), 690, 330)
 
 		love.graphics.print("Rocket Jump:  " .. toOnline(self.abilities.rocketJump), 340, 370)
 		love.graphics.print("Flashlight:   " .. toOnline(self.abilities.flashlight), 340, 390)
