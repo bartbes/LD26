@@ -123,12 +123,12 @@ class "TileMap" {
 
 		return solid
 	end,
-	
+
 	isDeadlyTile = function(self, x, y)
 		local tile = self.tiles[y][x]
 		return self.level:isDeadlyTile(encodeTile(tile))
 	end,
-	
+
 	isWinningTile = function(self, x, y)
 		local target = self.level:getTarget()
 		if target.x == x and target.y == y then
@@ -151,23 +151,23 @@ class "TileMap" {
 		self:modifyTile(x, y, newtile)
 		return true
 	end,
-	
+
 	isTerminalTile = function(self, x, y)
 		local tile = self.tiles[y][x]
 		return self.level:isTerminalTile(encodeTile(tile))
 	end,
-	
+
 	activateTerminal = function(self, x, y)
 		if not self:isTerminalTile(x, y) then return false end
 		self.minigame = self.level:activateTerminal(self, x, y)
 		return true
 	end,
-	
+
 	isDestructableTile = function(self, x, y)
 		local tile = self.tiles[y][x]
 		return self.level:isDestructableTile(encodeTile(tile))
-	end,	
-	
+	end,
+
 	destroyTile = function(self, x, y)
 		if not self:isDestructableTile(x, y) then return false end
 		local tile = self.tiles[y][x]

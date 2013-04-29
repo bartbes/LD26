@@ -55,7 +55,7 @@ Hacking = class.private "Hacking" (Minigame) {
 		if key == self.password[self.pos] then
 			self.pos = self.pos + 1
 			self.timer = 0
-		else 
+		else
 			self.failed = true
 		end
 	end,
