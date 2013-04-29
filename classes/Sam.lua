@@ -441,15 +441,15 @@ class "Sam"
 				self.laserCordinates.h = 2
 
 				local i = 0
-				while  not self.map:isSolid(math.ceil((self.rightFoot.x)/16)+i,math.ceil((self.rightFoot.y-9)/16)) do
+				while  not self.map:isSolid(math.ceil((self.rightFoot.x)/16)+i,math.ceil((self.rightFoot.y-6.5)/16)) do
 					i = i+1
 				end
-				if self.map:isDestructableTile(math.ceil((self.rightFoot.x)/16)+i,math.ceil((self.rightFoot.y-9)/16)) then
-					local id = math.ceil((self.rightFoot.x)/16)+i .. "," .. math.ceil((self.rightFoot.y-9)/16)
+				if self.map:isDestructableTile(math.ceil((self.rightFoot.x)/16)+i,math.ceil((self.rightFoot.y-6.5)/16)) then
+					local id = math.ceil((self.rightFoot.x)/16)+i .. "," .. math.ceil((self.rightFoot.y-6.5)/16)
 					if self.laserId == id then
 						self.laserTimer = self.laserTimer + dt
 						if self.laserTimer > 3 then
-							self.map:destroyTile(math.ceil((self.rightFoot.x)/16)+i,math.ceil((self.rightFoot.y-9)/16))
+							self.map:destroyTile(math.ceil((self.rightFoot.x)/16)+i,math.ceil((self.rightFoot.y-6.5)/16))
 							self.laserId = nil
 						end
 					else
@@ -466,15 +466,15 @@ class "Sam"
 				self.laserCordinates.h = 2
 
 				local i = 0
-				while  not self.map:isSolid(math.ceil((self.leftFoot.x)/16)+i,math.ceil((self.leftFoot.y-9)/16)) do
+				while  not self.map:isSolid(math.ceil((self.leftFoot.x)/16)+i,math.ceil((self.leftFoot.y-6.5)/16)) do
 					i = i-1
 				end
-				if self.map:isDestructableTile(math.ceil((self.leftFoot.x)/16)+i,math.ceil((self.leftFoot.y-9)/16)) then
-					local id = math.ceil((self.leftFoot.x)/16)+i .. "," .. math.ceil((self.leftFoot.y-9)/16)
+				if self.map:isDestructableTile(math.ceil((self.leftFoot.x)/16)+i,math.ceil((self.leftFoot.y-6.5)/16)) then
+					local id = math.ceil((self.leftFoot.x)/16)+i .. "," .. math.ceil((self.leftFoot.y-6.5)/16)
 					if self.laserId == id then
 						self.laserTimer = self.laserTimer + dt
 						if self.laserTimer > 3 then
-							self.map:destroyTile(math.ceil((self.leftFoot.x)/16)+i,math.ceil((self.leftFoot.y-9)/16))
+							self.map:destroyTile(math.ceil((self.leftFoot.x)/16)+i,math.ceil((self.leftFoot.y-6.5)/16))
 							self.laserId = nil
 						end
 					else
