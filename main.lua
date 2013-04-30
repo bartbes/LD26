@@ -6,9 +6,5 @@ function love.load(args)
 	love.graphics.setDefaultImageFilter("nearest", "nearest")
 	state.hook()
 
-	if args[2] == "menu" then
-		state.switch(menu)
-	else
-		state.switch(game, "levels/lvl2.txt")
-	end
+	state.switch(menu)
 end
