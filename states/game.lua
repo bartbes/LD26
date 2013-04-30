@@ -6,6 +6,7 @@ local bgm = require "bgm"
 local Dialog = require "minigames.Dialog"
 local Pausemenu = require "minigames.Pausemenu"
 local credits = require "states.credits"
+local sfx = require "sfx"
 
 local game = {}
 
@@ -44,6 +45,7 @@ function game:update(dt)
 			local scoreTotal = math.floor(math.max(300-self.timer, 0)/5)
 			dialogText = dialogText:format(self.timer, self.score, scoreTotal)
 			self.minigame = Dialog(dialogText)
+			sfx.play("teleport")
 		end
 		self.minigame:update(dt)
 		if self.minigame.open then
