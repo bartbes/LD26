@@ -78,6 +78,7 @@ class "Sam"
 		self.alive = true
 		self.levelComplete = false
 		self.extinguishing = false
+		self.jetPack = false
 		self.adjacentTile = {x=0,y=0}
 		self.flashlight = false
 		self.firingLaser = false
@@ -142,20 +143,26 @@ class "Sam"
 	end,
 
 	dash = function(self)
-		if self.fuel >= 25 and self.abilities.boost then
-			self.fuel = self.fuel - 25
-			if self.facingRight then
-				self.velocity.x = 200
-			else
-				self.velocity.x = -200
+		if self.abilities.boost then
+			if self.fuel >= 25 then
+				self.fuel = self.fuel - 25
+				if self.facingRight then
+					self.velocity.x = 200
+				else
+					self.velocity.x = -200
+				end
+				sfx.play("blip")
 			end
-			sfx.play("blip")
-		 end
+		else
+			sfx.play("no")
+		end
 	end,
 
 	toggleLight = function(self)
 		if self.abilities.flashlight then
 			self.flashlight = not self.flashlight
+		else
+			sfx.play("no")
 		end
 	end,
 
@@ -165,8 +172,12 @@ class "Sam"
 			if self.map:isTerminalTile(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16)) then
 				self.map:activateTerminal(math.ceil((self.leftFoot.x+3)/16),math.floor(self.leftFoot.y/16))
 			elseif self.map:isTerminalTile(math.ceil((self.rightFoot.x-3)/16),math.floor(self.rightFoot.y/16)) then
-				self.map:activateTerminal(math.ceil((self.rightFoot.x-3)/16),math.floor(self.rightFoot.y/16)) 
+				self.map:activateTerminal(math.ceil((self.rightFoot.x-3)/16),math.floor(self.rightFoot.y/16))
+			else
+				sfx.play("no")
 			end
+		else
+			sfx.play("no")
 		end
 	end,
 
@@ -189,8 +200,8 @@ class "Sam"
 		if not self.onGround then
 			self.acceleration.y =self.acceleration.y + 100
 		end
-
-		if not self.onGround and not self.jumping and love.keyboard.isDown(" ","w","up") and self.fuel > 0 and self.abilities.rocketJump then
+		
+		if not self.jumping and love.keyboard.isDown(" ","w","up")and self.abilities.rocketJump and not self.onGround and self.fuel > 0  then
 			if not self.sfx.jetpack then
 				self.thrustSystem:start()
 				self.sfx.jetpack = sfx.play("jetpack")
@@ -205,8 +216,18 @@ class "Sam"
 			self.sfx.jetpack:stop()
 			self.thrustSystem:stop()
 			self.sfx.jetpack = nil
+		end 
+		
+		if not self.jumping and love.keyboard.isDown(" ","w","up")and not self.abilities.rocketJump and not self.onGround then
+			if not self.jetpack then
+				sfx.play("no")
+				self.jetPack = true
+			end
+		else
+			self.jetPack = false
 		end
-
+			
+		
 		self.acceleration.x = - self.velocity.x
 
 	-- VELOCITY
@@ -415,6 +436,15 @@ class "Sam"
 					self.spraySystem:stop()
 				end
 			end
+		else 
+			if love.keyboard.isDown("x") then
+				if not self.extinguishing then
+					sfx.play("no")
+				end
+				self.extinguishing = true
+			else
+				self.extinguishing = false
+			end
 		end
 
 
@@ -443,13 +473,16 @@ class "Sam"
 		self.screenPosition.y = self.position.y + self.scroll.y
 
 				-- Laser
-		if love.keyboard.isDown("l") and self.abilities.laser then
+		if love.keyboard.isDown("l") then
+			if not self.firingLaser then
+				sfx.play("no")
+			end
 			self.firingLaser = true
 		else
 			self.firingLaser = false
 		end
 
-		if self.firingLaser then
+		if self.firingLaser and self.abilities.laser then
 			if not self.sfx.laser then
 				self.sfx.laser = sfx.play("laserHigh", true)
 			end
