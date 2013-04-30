@@ -94,6 +94,9 @@ class "TileMap" {
 
 		self.batteries = {}
 		self.batteryImage = cache.image("gfx/battery.png")
+		for i, v in ipairs(self.level:getBatteryPositions()) do
+			self:createBattery(v[1], v[2])
+		end
 
 		self:buildBatch()
 	end,
