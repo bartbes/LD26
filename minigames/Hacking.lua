@@ -1,5 +1,6 @@
 require "classes.Minigame"
 local cache = require "lib.cache"
+local sfx = require "sfx"
 
 local keys = {"0", "1"}
 local passwordList = {
@@ -36,6 +37,15 @@ Hacking = class.private "Hacking" (Minigame) {
 		self.scanlines = cache.image("gfx/scanLines.png")
 	end,
 
+	close = function(self, won)
+		if won then
+			sfx.play("win")
+		else
+			sfx.play("no")
+		end
+		return Minigame.close(self, won)
+	end,
+
 	update = function(self, dt)
 		Minigame.update(self, dt)
 
@@ -57,6 +67,7 @@ Hacking = class.private "Hacking" (Minigame) {
 		if key == self.password[self.pos] then
 			self.pos = self.pos + 1
 			self.timer = 0
+			sfx.play("correct")
 		else
 			self.failed = true
 		end
