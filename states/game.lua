@@ -80,11 +80,12 @@ function game:update(dt)
 	self.timer = self.timer + dt
 	if sam.alive then
 		sam:update(dt, self.minigame)
-	else
-		sam:spawn()
-		sam:update(0)
+	elseif not self.minigame then
 		self.minigame = Dialog("Mission Failure")
-		
+		function self.minigame.callback()
+			sam:spawn()
+			sam:update(0)
+		end
 	end
 end
 
