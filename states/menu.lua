@@ -17,7 +17,7 @@ function menu:load()
 
 	--self.bigfont = cache.font("fonts/PrStart.ttf:32")
 	self.smallfont = cache.font("fonts/PrStart.ttf:26")
-	self.title = cache.image("gfx/logotype.jpg")
+	self.title = cache.image("gfx/title.png")
 
 	love.graphics.setBackgroundColor(0, 0, 0)
 end
@@ -42,7 +42,7 @@ function menu:draw()
 	--love.graphics.setFont(self.bigfont)
 	--love.graphics.printf("S.A.M.", 0, 100, 1280, "center")
 	--love.graphics.printf("Rescue in Space", 0, 140, 1280, "center")
-	love.graphics.draw(self.title, 640, 60, 0, 0.75, 0.75, 400, 0)
+	love.graphics.draw(self.title)
 
 	love.graphics.setFont(self.smallfont)
 	local left, right = "> ", " <"
