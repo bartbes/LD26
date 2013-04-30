@@ -23,7 +23,7 @@ local function decodeTile(ch)
 		return 63
 	end
 
-	error("Invalid tile!")
+	error("Invalid tile: " .. ch)
 end
 
 local function encodeTile(tile)
