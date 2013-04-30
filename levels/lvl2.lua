@@ -110,7 +110,7 @@ lvl = class.private "Level2" (Level) {
 					map.minigame = Dialog("Security hatch: UNLOCKED")
 				end
 			end
-		elseif y == 21 and x >= 60 and x <= 61 then
+		elseif y == 60 and x >= 21 and x <= 22 then
 			function minigame.callback(success)
 				if success then
 					map:modifyTile(56, 7, "t")
