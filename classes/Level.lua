@@ -30,6 +30,10 @@ class "Level" {
 		return {}
 	end,
 
+	getBatteryPositions = function(self)
+		return {}
+	end,
+
 	isSolid = function(self, tile, tilenum)
 		return tilenum < 52
 	end,
