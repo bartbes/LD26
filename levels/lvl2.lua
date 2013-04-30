@@ -52,6 +52,20 @@ lvl = class.private "Level2" (Level) {
 		}
 	end,
 
+	getBatteryPositions = function(self)
+		return {
+			{35, 60},
+			{18, 60},
+			{90, 67},
+			{130, 56},
+			{131, 39},
+			{88, 46},
+			{27, 30},
+			{26, 30},
+			{25, 30},
+		}
+	end,
+
 	isTerminalTile = function(self, tile)
 		return tile == "z" or tile == "0"
 	end,
