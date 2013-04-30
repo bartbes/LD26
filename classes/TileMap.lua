@@ -226,7 +226,7 @@ class "TileMap" {
 			if v.x == x and v.y == y then
 				v.health = v.health - amount
 				v.system:setParticleLife(0.05, 0.05*v.health)
-				v.system:setSizes(v.health/3)
+				v.system:setSizes(0.5+v.health/6)
 				if v.health <= 0 then
 					table.remove(self.fires, i)
 				end
